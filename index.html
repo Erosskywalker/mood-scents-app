@@ -241,25 +241,144 @@
     </footer>
 
     <script>
-        // --- DADOS (DATABASE) ---
+        // --- DADOS OFICIAIS (Cruzamento: Papel Anotado + PDF Scentec) ---
         const fragrances = [
-            { id: "citrus-pop", name: "Citrus Pop", category: "Energia", icon: "🍊", selo: "/selo-energia.png", description: "Vibe solar. Cítrico explosivo." },
-            { id: "lotus-up", name: "Lótus Up", category: "Energia", icon: "🪷", selo: "/selo-energia.png", description: "Zen-ativo. Menta aquática." },
-            { id: "vanilla-haze", name: "Vanilla Haze", category: "Sedução", icon: "🍦", selo: "/selo-seducao.png", description: "Gourmand chic. Baunilha real." },
-            { id: "shine-on", name: "Shine On", category: "Sedução", icon: "🥂", selo: "/selo-seducao.png", description: "Efeito Champagne. Brilho puro." },
-            { id: "velvet-aura", name: "Velvet Aura", category: "Sedução", icon: "✨", selo: "/selo-seducao.png", description: "Spicy & Quente. Mistério na pele." },
-            { id: "wood-rush", name: "Wood Rush", category: "Autoestima", icon: "🌲", selo: "/selo-autoestima.png", description: "Madeiras nobres. Old Money vibe." },
-{ id: "juicy-glow", name: "Juicy Glow", category: "Autoestima", icon: "<img src='/juicy-glow-new.png' style='mix-blend-mode: multiply;'>", selo: "/selo-autoestima.png", description: "Suculento. Frutas vermelhas." },            { id: "calm-vibes", name: "Calm Vibes", category: "Relax", icon: "💜", selo: "/selo-relaxamento.png", description: "Lavanda francesa moderna." },
-            { id: "pure-bloom", name: "Pure Bloom", category: "Alegria", icon: "🌸", selo: "/selo-alegria.png", description: "Floral branco. Clean Girl." },
-            { id: "patch-crew", name: "Patch Crew", category: "Mindfulness", icon: "🍂", selo: "/selo-mindfulness.png", description: "Terroso doce. Grounding." }
+            { 
+                id: "citrus-pop", 
+                name: "Citrus Pop", 
+                category: "Energia", 
+                icon: "🍋", 
+                selo: "/selo-energia.png", 
+                description: "Cítricos. Uma explosão solar para despertar.",
+                notes: "Topo: Bergamota, Limão | Fundo: Musk"
+            },
+            { 
+                id: "vanilla-haze", 
+                name: "Vanilla Haze", 
+                category: "Sedução", 
+                icon: "🍦", 
+                selo: "/selo-seducao.png", 
+                description: "Baunilha Oriental. O doce adulto, cremoso e viciante.",
+                notes: "Corpo: Orquídea | Fundo: Baunilha, Caramelo"
+            },
+            { 
+                id: "shine-on", 
+                name: "Shine On", 
+                category: "Sedução", 
+                icon: "🥂", 
+                selo: "/selo-seducao.png", 
+                description: "Champagne. Efervescente, festivo e brilhante.",
+                notes: "Topo: Acorde Champagne | Fundo: Sândalo"
+            },
+            { 
+                id: "wood-rush", 
+                name: "Wood Rush", 
+                category: "Autoestima", 
+                icon: "🌲", 
+                selo: "/selo-autoestima.png", 
+                description: "Amadeirado. Sofisticação e estrutura para quem tem presença.",
+                notes: "Topo: Cardamomo | Fundo: Cedro, Couro"
+            },
+            { 
+                id: "calm-vibes", 
+                name: "Calm Vibes", 
+                category: "Relaxamento", 
+                icon: "💜", 
+                selo: "/selo-relaxamento.png", 
+                description: "Lavanda. O respiro fundo em dias caóticos.",
+                notes: "Topo: Lavanda, Bergamota | Fundo: Cashmeran"
+            },
+            { 
+                id: "velvet-aura", 
+                name: "Velvet Aura", 
+                category: "Sedução", 
+                icon: "✨", 
+                selo: "/selo-seducao.png", 
+                description: "Oriental. Especiarias, mistério e calor na pele.",
+                notes: "Topo: Ameixa, Coco | Fundo: Sândalo"
+            },
+            { 
+                id: "patch-crew", 
+                name: "Patch Crew", 
+                category: "Mindfulness", 
+                icon: "🍂", 
+                selo: "/selo-mindfulness.png", 
+                description: "Patchouli & Baunilha. Profundidade terrosa com toque doce.",
+                notes: "Corpo: Orquídea | Fundo: Patchouli, Baunilha"
+            },
+            { 
+                id: "lotus-up", 
+                name: "Lótus Up", 
+                category: "Energia", 
+                icon: "🪷", 
+                selo: "/selo-energia.png", 
+                description: "Lótus e Menta. Frescor aquático para limpar a mente.",
+                notes: "Topo: Notas Verdes | Corpo: Menta, Lótus"
+            },
+            { 
+                id: "juicy-glow", 
+                name: "Juicy Glow", 
+                category: "Autoestima", 
+                icon: "<img src='/juicy-glow-new.png' style='mix-blend-mode: multiply;'>", 
+                selo: "/selo-autoestima.png", 
+                description: "Frutal. Suculência jovem de frutas vermelhas e maçã.",
+                notes: "Topo: Maçã, Pera | Fundo: Musk"
+            },
+            { 
+                id: "pure-bloom", 
+                name: "Pure Bloom", 
+                category: "Alegria", 
+                icon: "🌸", 
+                selo: "/selo-alegria.png", 
+                description: "Jasmim. Floral radiante, feminino e cheio de luz.",
+                notes: "Topo: Frutas Vermelhas | Corpo: Jasmim, Tuberosa"
+            }
         ];
 
+        // Combinações sugeridas (Lógica: Equilíbrio Olfativo)
         const combinations = [
-            { id: "good-vibes", mood: "Energia", name: "Good Vibes Only", ids: ["lotus-up", "citrus-pop"], desc: "O antídoto para dias cinzas." },
-            { id: "foco", mood: "Foco", name: "CEO Mindset", ids: ["calm-vibes", "wood-rush"], desc: "Calma e firmeza para resolver tudo." },
-            { id: "sedu", mood: "Sedução", name: "Doce Tentação", ids: ["juicy-glow", "vanilla-haze"], desc: "Absolutamente irresistível." },
-            { id: "luxo", mood: "Poder", name: "Rich Energy", ids: ["velvet-aura", "wood-rush", "shine-on"], desc: "Cheiro de herdeira." },
-            { id: "boss", mood: "Poder", name: "Boss Mode", ids: ["citrus-pop", "wood-rush"], desc: "Presença marcante." }
+            { 
+                id: "clean-girl", 
+                mood: "Clean Aesthetic", 
+                name: "Fresh & Clean", 
+                ids: ["calm-vibes", "lotus-up"], 
+                desc: "Lavanda + Menta. A sensação de banho tomado o dia todo." 
+            },
+            { 
+                id: "boss-bitch", 
+                mood: "Poder", 
+                name: "CEO Energy", 
+                ids: ["wood-rush", "citrus-pop"], 
+                desc: "Madeira + Cítricos. A assinatura de quem lidera." 
+            },
+            { 
+                id: "date-night", 
+                mood: "Sedução", 
+                name: "Date Night", 
+                ids: ["vanilla-haze", "velvet-aura"], 
+                desc: "Baunilha + Oriental. Intenso, noturno e inesquecível." 
+            },
+            { 
+                id: "party-mode", 
+                mood: "Festa", 
+                name: "Party Girl", 
+                ids: ["shine-on", "juicy-glow"], 
+                desc: "Champagne + Frutas. O mood perfeito para celebrar." 
+            },
+            { 
+                id: "hippie-chic", 
+                mood: "Boho", 
+                name: "Boho Chic", 
+                ids: ["patch-crew", "pure-bloom"], 
+                desc: "Patchouli + Jasmim. Um floral terroso super moderno." 
+            },
+            { 
+                id: "golden-hour", 
+                mood: "Radiante", 
+                name: "Golden Hour", 
+                ids: ["juicy-glow", "vanilla-haze"], 
+                desc: "Frutal + Baunilha. Doce, dourado e solar." 
+            }
         ];
 
         let selectedFragrances = [];
@@ -274,6 +393,7 @@
                     <div class="card-icon">${f.icon}</div>
                     <span>${f.category}</span>
                     <h3>${f.name}</h3>
+                    <p style="font-weight: 600; font-size: 0.7rem; color: var(--text-primary); margin-bottom: 0.5rem; text-transform: uppercase;">${f.notes}</p>
                     <p>${f.description}</p>
                 </div>
             `).join('');
@@ -299,11 +419,10 @@
                 return;
             }
 
-            // Verifica Match
             const matched = combinations.find(combo => {
                 const comboIds = [...combo.ids].sort();
                 const selectedIds = [...selectedFragrances].sort();
-                return JSON.stringify(comboIds) === JSON.stringify(selectedIds);
+                return comboIds.every(id => selectedIds.includes(id)) && comboIds.length === selectedIds.length;
             });
 
             const selectedObjs = selectedFragrances.map(id => fragrances.find(f => f.id === id));
@@ -311,13 +430,14 @@
             area.innerHTML = `
                 <div class="result-box">
                     ${matched ? `<h3 class="match-title">${matched.name}</h3>` : '<h3 class="match-title">Sua Mistura Única</h3>'}
+                    ${matched ? `<span style="text-transform: uppercase; letter-spacing: 1px; font-size: 0.7rem; background: #F5F2EB; padding: 4px 10px; border-radius: 20px; margin-bottom: 1rem; display: inline-block;">Mood: ${matched.mood}</span>` : ''}
                     
                     <div style="display: flex; justify-content: center; gap: 1rem; margin: 1.5rem 0; font-size: 2rem;">
                         ${selectedObjs.map(f => `<span>${f.icon}</span>`).join('<span style="font-size: 1rem; align-self: center; opacity: 0.3;">+</span>')}
                     </div>
 
                     <p class="italic" style="margin-bottom: 2rem; color: var(--text-secondary);">
-                        ${matched ? matched.desc : 'Uma alquimia exclusiva criada por você. Teste na pele.'}
+                        ${matched ? matched.desc : 'Uma alquimia exclusiva criada por você. A ciência diz que misturar aumenta a complexidade sensorial.'}
                     </p>
 
                     <button class="btn-primary" onclick="checkoutZap()">
@@ -354,7 +474,6 @@
 
             const nomes = selectedFragrances.map(id => fragrances.find(f => f.id === id).name).join(' + ');
             
-            // Verifica match de novo para o texto
             const matched = combinations.find(combo => {
                 const comboIds = [...combo.ids].sort();
                 const selectedIds = [...selectedFragrances].sort();
@@ -362,18 +481,18 @@
             });
             const moodName = matched ? matched.name : "Minha Vibe Custom";
 
-            // MENSAGEM PRONTA
             const texto = `Oie Mood Scents! ✌️\n\nAcabei de montar minha vibe no site e AMEI.\n\n✨ *Mood:* ${moodName}\n🧪 *Mix:* ${nomes}\n\nQuero garantir esse combo. Como faz?`;
             
-            // SEU NÚMERO AQUI (Mantenha o 55 na frente)
+            // ATENÇÃO: Coloque aqui o número real do seu WhatsApp
             const fone = "5551999999999"; 
             
             window.open(`https://wa.me/${fone}?text=${encodeURIComponent(texto)}`, '_blank');
         }
 
-        // --- EFEITO DE BACKGROUND (EMOJIS FLUTUANDO) ---
+        // --- BACKGROUND ANIMATION ---
         function initBg() {
             const container = document.getElementById('bgEmojis');
+            if(!container) return;
             const icons = ["🍊", "✨", "🌸", "🍦", "🌲", "🥂"];
             
             for(let i=0; i<15; i++) {
@@ -396,5 +515,3 @@
             window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
         }
     </script>
-</body>
-</html>
