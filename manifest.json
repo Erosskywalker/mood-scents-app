@@ -4,8 +4,9 @@
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FDFBF7",
-  "theme_color": "#CAB49E",
-  "description": "Crie sua fragrância única com layering.",
+  "theme_color": "#FDFBF7",
+  "orientation": "portrait",
+  "description": "Main Character Energy. Crie sua fragrância única.",
   "icons": [
     {
       "src": "/icone-192.png",
