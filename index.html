@@ -2,1143 +2,447 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mood Scents - Sua Vibe, Seu Aroma</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mood Scents | Ritual de Layering</title>
     
     <!-- PWA Meta Tags -->
-    <meta name="description" content="Crie sua fragrância única com layering de perfumes. Mood Scents - Sua Vibe, Seu Aroma.">
-    <meta name="theme-color" content="#ff006e">
+    <meta name="theme-color" content="#FDFBF7">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Mood Scents">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="description" content="Não use apenas um perfume. Projete sua emoção. Mood Scents Layering.">
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/png" href="/logo.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
-    <link rel="apple-touch-icon" href="/icon-192.png">
     
+    <!-- Fonts High Style: Cormorant (Editorial) + Montserrat (Minimal) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            /* Paleta "Luxury Nude" */
+            --bg-body: #FDFBF7; /* Creme Papel */
+            --bg-glass: rgba(255, 255, 255, 0.6);
+            --text-primary: #1A1A1A; /* Charcoal (não preto puro) */
+            --text-secondary: #595959;
+            --accent-gold: #BFA480; /* Dourado Fosco */
+            --accent-rose: #D4A5A5; /* Rose Muted */
+            --border-light: rgba(0, 0, 0, 0.05);
+            --shadow-soft: 0 10px 40px rgba(0,0,0,0.03);
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
         }
 
-        :root {
-            --bg-dark: #0a0a0f;
-            --bg-card: #1a1a2e;
-            --primary: #ff006e;
-            --secondary: #8338ec;
-            --text: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.7);
-            --border: rgba(255, 255, 255, 0.1);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text);
-            line-height: 1.6;
-            scroll-behavior: smooth;
+            font-family: var(--font-body);
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
+        /* Utilitários de Texto */
+        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 400; letter-spacing: -0.02em; }
+        .italic { font-style: italic; }
+        .btn-text { text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.75rem; font-weight: 600; }
+
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 1.5rem;
         }
 
-        /* Navbar */
+        /* Navigation Minimalista */
         nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 15, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
+            top: 0; width: 100%;
+            padding: 1.5rem 0;
+            background: rgba(253, 251, 247, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 1000;
-            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-light);
+            transition: all 0.3s ease;
         }
 
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        
+        .logo img { height: 45px; width: auto; filter: grayscale(100%); opacity: 0.9; } /* Logo elegante */
 
-        nav .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+        .menu { display: flex; gap: 2.5rem; }
+        .menu a { text-decoration: none; color: var(--text-primary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; position: relative; }
+        .menu a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px; background: var(--accent-gold); transition: width 0.3s; }
+        .menu a:hover::after { width: 100%; }
 
-        nav .logo img {
-            height: 60px;
-            width: auto;
-        }
-
-        nav h1 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        nav .menu {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--primary);
-        }
-
-        .btn {
-            background: var(--primary);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn:hover {
-            background: #e6005f;
-            transform: scale(1.05);
-        }
-
-        /* Hero */
+        /* Hero Section: Estilo Editorial */
         .hero {
-            min-height: 100vh;
+            min-height: 90vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 6rem 1.5rem 4rem;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
         }
+
+        /* Efeito de fundo fluido (Blob) */
+        .blob-bg {
+            position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(212,165,165,0.15) 0%, rgba(253,251,247,0) 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: breathe 8s ease-in-out infinite;
+        }
+
+        @keyframes breathe { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.2); } }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 900;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            line-height: 0.95;
             margin-bottom: 1.5rem;
-            line-height: 1.1;
+            color: var(--text-primary);
         }
 
-        .gradient-text {
-            background: linear-gradient(to right, var(--primary), var(--secondary), var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            background-size: 200% auto;
-            animation: gradient 3s linear infinite;
-        }
-
-        @keyframes gradient {
-            to { background-position: 200% center; }
-        }
-
+        .hero h1 span { display: block; font-style: italic; color: var(--accent-gold); }
+        
         .hero p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: var(--text-muted);
-            max-width: 48rem;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
             margin: 0 auto 2.5rem;
+            font-weight: 300;
         }
 
-        .icons-float {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 3rem;
+        .btn-primary {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--text-primary);
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--text-primary);
         }
 
-        .icons-float span {
-            font-size: 2.5rem;
-            animation: float 3s ease-in-out infinite;
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--text-primary);
         }
 
-        .icons-float span:nth-child(even) {
-            animation-delay: 0.5s;
-        }
+        /* Cards Glassmorphism */
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; }
+        .section-title span { font-style: italic; color: var(--accent-gold); }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Section */
-        section {
-            padding: 5rem 1.5rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 900;
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.125rem;
-            color: var(--text-muted);
-            max-width: 42rem;
-            margin: 0 auto 4rem;
-        }
-
-        /* Cards Grid */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
         }
 
         .card {
-            background: rgba(26, 26, 46, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: 1rem;
-            overflow: hidden;
-            transition: all 0.3s;
+            background: #fff;
+            border: 1px solid var(--border-light);
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
         }
 
+        .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-soft); border-color: var(--accent-gold); }
+        
         .card-selo {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            width: 60px;
-            height: 60px;
-            z-index: 10;
-            opacity: 0.9;
+            top: -15px; right: -15px;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            animation: float 4s ease-in-out infinite;
         }
 
-        .card:hover {
-            border-color: var(--primary);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(255, 0, 110, 0.2);
+        .card-icon { 
+            font-size: 3rem; margin-bottom: 1rem; height: 60px; display: flex; align-items: center; justify-content: center; 
         }
+        
+        /* Ajuste especial para quando o ícone é imagem */
+        .card-icon img { height: 100%; width: auto; object-fit: contain; }
 
-        .card-header {
-            height: 0.5rem;
-        }
+        .card-title { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .card-category { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent-gold); margin-bottom: 1rem; display: block; }
+        .card-desc { font-size: 0.9rem; color: var(--text-secondary); font-weight: 300; }
 
-        .card-body {
-            padding: 1.5rem;
-        }
-
-        .card-badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .card-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            transition: transform 0.3s;
-        }
-
-        .card:hover .card-icon {
-            transform: scale(1.1);
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-
-        .card-description {
-            color: var(--text-muted);
-            font-style: italic;
-        }
-
-        /* Coming Soon Card */
-        .card-coming-soon {
-            border: 2px dashed rgba(255, 0, 110, 0.5);
-            position: relative;
-        }
-
-        .badge-coming-soon {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: var(--primary);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Vibes Grid */
-        .vibes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .vibe-card {
-            background: rgba(26, 26, 46, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: 1rem;
-            padding: 2rem;
-            transition: all 0.3s;
-        }
-
-        .vibe-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-5px);
-        }
-
-        .vibe-mood {
-            font-size: 0.875rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .vibe-name {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }
-
-        .vibe-description {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-        }
-
-        .vibe-fragrances {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .vibe-frag {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .vibe-frag-icon {
-            font-size: 2rem;
-        }
-
-        .vibe-frag-name {
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        /* Interactive Selector */
+        /* Mixer Area (A "Cozinha") */
+        #crie { background: #F5F2EB; padding: 6rem 0; position: relative; }
+        
         .selector-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 1rem;
             margin-bottom: 3rem;
         }
 
         .selector-btn {
-            padding: 1rem;
-            background: rgba(26, 26, 46, 0.5);
-            border: 2px solid var(--border);
-            border-radius: 1rem;
+            width: 100px; height: 120px;
+            background: #fff;
+            border: 1px solid rgba(0,0,0,0.08);
             cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .selector-btn:hover:not(:disabled) {
-            border-color: rgba(255, 0, 110, 0.5);
-            transform: scale(1.05);
-        }
-
-        .selector-btn.selected {
-            border-color: var(--primary);
-            background: rgba(255, 0, 110, 0.2);
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.3);
-        }
-
-        .selector-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        .selector-icon {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .selector-name {
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        .result-card {
-            background: rgba(255, 0, 110, 0.1);
-            border: 1px solid rgba(255, 0, 110, 0.3);
-            border-radius: 1rem;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .result-card.matched {
-            background: rgba(255, 0, 110, 0.2);
-            border: 2px solid var(--primary);
-            box-shadow: 0 20px 60px rgba(255, 0, 110, 0.4);
-        }
-
-        .match-banner {
-            background: rgba(255, 0, 110, 0.2);
-            border: 2px solid var(--primary);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            animation: pulse 2s infinite;
-        }
-
-        .match-title {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--primary);
-            margin-bottom: 0.75rem;
+            transition: all 0.2s;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            padding: 1rem;
         }
 
-        .sparkle {
-            animation: spin 2s linear infinite;
-        }
+        .selector-btn:hover { transform: translateY(-3px); border-color: var(--accent-gold); }
+        .selector-btn.selected { background: var(--text-primary); color: #fff; border-color: var(--text-primary); }
+        .selector-btn.selected .selector-name { color: #fff; }
+        .selector-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
 
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+        .selector-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .selector-icon img { width: 40px; height: 40px; object-fit: contain; }
+        .selector-name { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500; color: var(--text-primary); }
 
-        .selected-icons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-
-        .selected-icon {
-            font-size: 4rem;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .plus-sign {
-            font-size: 2rem;
-            color: var(--primary);
-            font-weight: 900;
-        }
-
-        .result-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid rgba(255, 0, 110, 0.5);
-            color: var(--text);
-        }
-
-        .btn-outline:hover {
-            background: rgba(255, 0, 110, 0.1);
-        }
-
-        /* Science Section */
-        .science-card {
-            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1), rgba(131, 56, 236, 0.1));
-            border: 1px solid var(--border);
-            border-radius: 1rem;
+        /* Result Box */
+        .result-area {
+            background: #fff;
+            max-width: 600px;
+            margin: 0 auto;
             padding: 3rem;
-        }
-
-        .science-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .brain-icon {
-            font-size: 6rem;
-            margin-bottom: 1.5rem;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .quote-card {
-            background: rgba(10, 10, 15, 0.5);
-            border: 1px solid rgba(255, 0, 110, 0.3);
-            border-radius: 0.75rem;
-            padding: 2rem;
-            position: relative;
-        }
-
-        .quote-mark {
-            position: absolute;
-            top: 0;
-            right: 1rem;
-            font-size: 4rem;
-            color: rgba(255, 0, 110, 0.1);
-            font-weight: 900;
-        }
-
-        .quote-text {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .quote-author {
-            font-size: 1.125rem;
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        /* Values Section */
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .value-card {
-            background: rgba(26, 26, 46, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: 1rem;
-            padding: 2rem;
+            border: 1px solid var(--accent-gold);
             text-align: center;
-            transition: all 0.3s;
+            position: relative;
         }
 
-        .value-card:hover {
-            border-color: rgba(255, 0, 110, 0.5);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(255, 0, 110, 0.2);
-        }
-
-        .value-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .value-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-
-        .value-description {
-            color: var(--text-muted);
+        .result-area::before {
+            content: 'RESULTADO';
+            position: absolute;
+            top: -10px; left: 50%; transform: translateX(-50%);
+            background: #F5F2EB;
+            padding: 0 1rem;
+            font-size: 0.7rem; letter-spacing: 0.2em; color: var(--accent-gold);
         }
 
         /* Footer */
-        footer {
-            background: var(--bg-dark);
-            border-top: 1px solid var(--border);
-            padding: 4rem 1.5rem 2rem;
-        }
+        footer { padding: 4rem 0; text-align: center; border-top: 1px solid var(--border-light); margin-top: 4rem; }
+        .footer-links a { margin: 0 1rem; color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; }
 
-        .footer-cta {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .footer-cta h3 {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            font-weight: 900;
-            margin-bottom: 2rem;
-            line-height: 1.3;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid var(--border);
-            padding-top: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.875rem;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-
-        .bg-muted {
-            background: rgba(26, 26, 46, 0.3);
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .mb-4 {
-            margin-bottom: 1rem;
-        }
-
-        .mb-6 {
-            margin-bottom: 1.5rem;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            nav .menu {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            nav .menu.active {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(10, 10, 15, 0.95);
-                padding: 1rem;
-                gap: 1rem;
-            }
+            .hero h1 { font-size: 3.5rem; }
+            .menu { display: none; } /* Simplificação para mobile */
+            .mobile-menu-btn { display: block; font-size: 1.5rem; background: none; border: none; cursor: pointer; }
+            .card-selo { width: 40px; height: 40px; }
         }
+        
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
+
     <nav>
         <div class="container">
             <div class="logo">
-                <img src="/logo.png" alt="Mood Scents Logo">
+                <!-- Se tiver o arquivo logo.png, ele aparece aqui, senão fica texto -->
+                <img src="/logo.png" alt="MS" onerror="this.style.display='none'; document.getElementById('txt-logo').style.display='block'">
+                <span id="txt-logo" style="display:none; font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; letter-spacing: -1px;">MoodScents.</span>
             </div>
-            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
-            <div class="menu" id="menu">
-                <a href="#aromas">Fragrâncias</a>
-                <a href="#vibes">Vibes Sugeridas</a>
-                <a href="#ciencia">Neurociência</a>
-                <a href="#crie">Crie seu Mood</a>
-                <a href="#valores">Por que Nós?</a>
-                <a href="#crie" class="btn">🛒 Comprar</a>
+            <div class="menu">
+                <a href="#aromas">Bases</a>
+                <a href="#vibes">Vibes</a>
+                <a href="#ciencia">Ciência</a>
+                <a href="#crie">O Laboratório</a>
             </div>
+            <button class="mobile-menu-btn" onclick="document.querySelector('.menu').style.display = document.querySelector('.menu').style.display === 'flex' ? 'none' : 'flex'" style="display: none;">☰</button>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero">
+    <header class="hero">
+        <div class="blob-bg"></div>
         <div class="container">
-            <h1>
-                SUA VIBE, <span class="gradient-text">SEU AROMA.</span>
-            </h1>
-            <p>
-                Chega de usar o mesmo cheiro de todo mundo. Com Mood Scents, você é o perfumista. 
-                Misture, combine e crie uma fragrância que é 100% você.
-            </p>
-            <a href="#crie" class="btn">✨ Crie Seu Mood Agora</a>
-            <div class="icons-float">
-                <span>🍊</span>
-                <span>🪷</span>
-                <span>🍦</span>
-                <span>🥂</span>
-                <span>✨</span>
-                <span>🌲</span>
-                <span>🍓</span>
-                <span>💜</span>
-                <span>🌸</span>
-                <span>🍂</span>
+            <h1>Crie sua Aura.<br><span>Layering Ritual.</span></h1>
+            <p>A perfumaria tradicional diz quem você deve ser.<br>O <strong>Mood Scents</strong> pergunta quem você quer sentir.</p>
+            <a href="#crie" class="btn-primary">Iniciar Ritual</a>
+        </div>
+    </header>
+
+    <section id="aromas" style="padding: 5rem 0;">
+        <div class="container">
+            <h2 class="section-title">O Guarda-Roupa <span>Olfativo</span></h2>
+            <div class="cards-grid" id="aromasGrid">
+                <!-- JS vai preencher aqui -->
             </div>
         </div>
     </section>
 
-    <!-- Fragrâncias Section -->
-    <section id="aromas">
+    <section id="vibes" style="background: #fff; padding: 5rem 0; border-top: 1px solid var(--border-light);">
         <div class="container">
-            <h2 class="section-title">
-                Conheça as <span class="gradient-text">Bases</span>
-            </h2>
-            <p class="section-subtitle">
-                Cada fragrância é um mood, validado pela neurociência. Use sozinho ou combine para criar o seu próprio efeito.
-            </p>
-            <div class="cards-grid" id="aromasGrid"></div>
-        </div>
-    </section>
-
-    <!-- Vibes Sugeridas -->
-    <section id="vibes">
-        <div class="container">
-            <h2 class="section-title">
-                Nossas <span class="gradient-text">Vibes Sugeridas</span>
-            </h2>
-            <p class="section-subtitle">
-                Explore nossas combinações sugeridas, baseadas na neurociência e no seu portfólio de bases.
-            </p>
-            <div class="vibes-grid" id="vibesGrid"></div>
-        </div>
-    </section>
-
-    <!-- Neurociência -->
-    <section id="ciencia">
-        <div class="container">
-            <h2 class="section-title">
-                A <span class="gradient-text">Ciência</span> por Trás do Mood
-            </h2>
-            <p class="section-subtitle">
-                Mais que um cheiro, uma sensação comprovada.
-            </p>
-            <div class="science-card">
-                <div class="science-grid">
-                    <div>
-                        <div class="brain-icon">🧠</div>
-                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">
-                            Neurociência e Bem-Estar
-                        </h3>
-                        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-                            O sistema olfativo é uma das maneiras mais rápidas de impactar nosso estado cognitivo e emocional. 
-                            De fato, <strong style="color: var(--primary);">75% das emoções</strong> que experimentamos todos os dias são desencadeadas pelo cheiro.
-                        </p>
-                        <p style="color: var(--text-muted);">
-                            Nossas fragrâncias são desenvolvidas com base em estudos de neurociência olfativa, 
-                            criando composições que comprovadamente promovem sensações de bem-estar, foco e relaxamento.
-                        </p>
-                    </div>
-                    <div>
-                        <div class="quote-card">
-                            <div class="quote-mark">"</div>
-                            <p class="quote-text">
-                                "E se pudéssemos ter uma fragrância capaz de despertar um sentimento?"
-                            </p>
-                            <p class="quote-author">Nós podemos.</p>
-                        </div>
-                    </div>
-                </div>
+            <h2 class="section-title">Vibes <span>Assinadas</span></h2>
+            <p style="text-align: center; margin-bottom: 3rem; color: var(--text-secondary);">Combinações validadas pela neurociência para alterar seu estado de espírito.</p>
+            <div class="cards-grid" id="vibesGrid">
+                <!-- JS vai preencher aqui -->
             </div>
         </div>
     </section>
 
-    <!-- Crie Seu Mood -->
-    <section id="crie" class="bg-muted">
+    <section id="crie">
         <div class="container">
-            <h2 class="section-title">
-                O <span class="gradient-text">Laboratório</span> é Seu
-            </h2>
-            <p class="section-subtitle">
-                Selecione dois ou três aromas e descubra a vibe que vocês criam juntos.
-            </p>
+            <h2 class="section-title">O Laboratório</h2>
+            <p style="text-align: center; margin-bottom: 2rem;" class="italic">Selecione 2 ou 3 bases para descobrir sua alquimia.</p>
             
-            <div style="max-width: 1000px; margin: 0 auto;">
-                <h3 style="font-size: 1.5rem; font-weight: 700; text-align: center; margin-bottom: 2rem;">
-                    1️⃣ Escolha suas bases:
-                </h3>
-                <div class="selector-grid" id="selectorGrid"></div>
-                <p class="text-center mb-6" style="color: var(--text-muted); font-size: 0.875rem;" id="selectionHint">
-                    Selecione 2 ou 3 aromas
-                </p>
-
-                <h3 style="font-size: 1.5rem; font-weight: 700; text-align: center; margin-bottom: 2rem;">
-                    2️⃣ Seu Mood:
-                </h3>
-                <div id="resultArea"></div>
+            <div class="selector-grid" id="selectorGrid"></div>
+            
+            <div id="resultArea" style="margin-top: 2rem;">
+                <!-- Resultado aparece aqui -->
             </div>
         </div>
     </section>
 
-    <!-- Valores -->
-    <section id="valores">
-        <div class="container">
-            <h2 class="section-title">
-                Feito para você, <span class="gradient-text">pensando no mundo.</span>
-            </h2>
-            <div class="values-grid">
-                <div class="value-card">
-                    <div class="value-icon">✧</div>
-                    <h3 class="value-title">100% Vegan</h3>
-                    <p class="value-description">Nenhum ingrediente de origem animal. Nunca.</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon">♡</div>
-                    <h3 class="value-title">Cruelty-Free</h3>
-                    <p class="value-description">Amamos os animais. Nossos produtos não são testados neles.</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon">⟡</div>
-                    <h3 class="value-title">Sua Identidade</h3>
-                    <p class="value-description">Criado para ser único, assim como você. Liberdade para se expressar.</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon">🇧🇷</div>
-                    <h3 class="value-title">Empresa Gaúcha</h3>
-                    <p class="value-description">Made in POA. Qualidade de perfumaria francesa, vibe 100% brasileira.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-cta">
-                <h3>
-                    NÃO USE O MESMO PERFUME DE TODO MUNDO<br>
-                    PERSONALIZE<br>
-                    <span class="gradient-text">DESPERTE SEU MOOD AGORA</span>
-                </h3>
-                <a href="#crie" class="btn">✨ Crie Seu Mood</a>
+            <img src="/logo.png" style="height: 30px; margin-bottom: 1rem; opacity: 0.5;">
+            <div class="footer-links">
+                <a href="#">Instagram</a>
+                <a href="#">Shop</a>
+                <a href="#">Contato</a>
             </div>
-            <div class="footer-bottom">
-                <div>
-                    <img src="/logo.png" alt="Mood Scents Logo" style="height: 60px; width: auto; margin-bottom: 1rem;">
-                    <p style="font-size: 0.875rem; color: var(--text-muted);">
-                        Mood Scents - Sua Vibe - Seu Aroma
-                    </p>
-                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">
-                        © 2025 Mood Scents. Todos os direitos reservados.
-                    </p>
-                </div>
-                <div class="footer-links">
-                    <a href="#aromas">Fragrâncias</a>
-                    <a href="#vibes">Vibes Sugeridas</a>
-                    <a href="#ciencia">Neurociência</a>
-                    <a href="#crie">Crie seu Mood</a>
-                    <a href="#valores">Por que Nós?</a>
-                </div>
-            </div>
+            <p style="margin-top: 2rem; font-size: 0.7rem; color: #999;">&copy; 2025 Mood Scents. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Data
+        // --- DADOS ---
         const fragrances = [
-            { id: "citrus-pop", name: "Citrus Pop", category: "ENERGIA", icon: "🍊", selo: "/selo-energia.png", description: "Refrescante, leve e vibrante, perfeito para dar um toque de energia ao seu dia.", color: "from-yellow-400 to-orange-500" },
-            { id: "lotus-up", name: "Lótus Up", category: "ENERGIA", icon: "🌸", selo: "/selo-energia.png", description: "Aquática, com menta e zen, leve e revigorante, para uma sensação de paz ativa.", color: "from-yellow-400 to-orange-500" },
-            { id: "vanilla-haze", name: "Vanilla Haze", category: "SEDUÇÃO", icon: "🍬", selo: "/selo-seducao.png", description: "Doce, gourmand e cremosa, traz conforto e uma sensualidade aconchegante.", color: "from-pink-500 to-red-600" },
-            { id: "shine-on", name: "Shine On", category: "SEDUÇÃO", icon: "🥂", selo: "/selo-seducao.png", description: "Borbulhante, frutada e festiva, para celebrar cada momento com brilho.", color: "from-pink-500 to-red-600" },
-            { id: "velvet-aura", name: "Velvet Aura", category: "SEDUÇÃO", icon: "✨", selo: "/selo-seducao.png", description: "Especiarias, quente e intensa, para um toque misterioso e opulento.", color: "from-pink-500 to-red-600" },
-            { id: "wood-rush", name: "Wood Rush", category: "AUTO ESTIMA", icon: "🌲", selo: "/selo-autoestima.png", description: "Seca, quente e sólida, para uma presença marcante e sofisticada.", color: "from-purple-400 to-pink-500" },
-            { id: "juicy-glow", name: "Juicy Glow", category: "AUTO ESTIMA", icon: "<img src='/juicy-glow-new.png' style='width: 80px; height: 80px; object-fit: contain;'>", selo: "/selo-autoestima.png", description: "Suculenta, doce e divertida, para um toque jovem e irresistível.", color: "from-purple-400 to-pink-500" },
-            { id: "calm-vibes", name: "Calm Vibes", category: "RELAXAMENTO", icon: "💜", selo: "/selo-relaxamento.png", description: "Floral de lavanda, relaxante e limpa, ideal para momentos de tranquilidade e foco.", color: "from-blue-400 to-cyan-500" },
-            { id: "pure-bloom", name: "Pure Bloom", category: "ALEGRIA", icon: "🌺", selo: "/selo-alegria.png", description: "Jasmin puro e delicado, traz serenidade e uma elegância natural.", color: "from-yellow-300 to-yellow-500" },
-            { id: "patch-crew", name: "Patch Crew", category: "MINDFULNESS", icon: "🍂", selo: "/selo-mindfulness.png", description: "Terrosa, adocicada e envolvente, traz profundidade e um calor sutil.", color: "from-amber-600 to-orange-700" },
-            { id: "secret-scent", name: "???", category: "MISTÉRIO", icon: "🔮", description: "Uma fragrância secreta está chegando... Prepare-se para o inesperado.", color: "from-violet-600 to-purple-900", comingSoon: true }
-        };
-
-        const combinations = [
-            // COMBINAÇÕES TESTADAS (10)
-            { id: "good-vibes-only", mood: "Energia", name: "Good Vibes Only", description: "Leve e feliz. A combinação aquática do Lótus Up com o frescor do Citrus Pop te faz sorrir instantaneamente.", fragranceIds: ["lotus-up", "citrus-pop"] },
-            { id: "foco-total", mood: "Mindfulness", name: "Foco Total", description: "Para momentos de tranquilidade. O Calm Vibes acalma a mente e o Wood Rush traz solidez.", fragranceIds: ["calm-vibes", "wood-rush"] },
-            { id: "zen-garden", mood: "Serenidade", name: "Zen Garden", description: "A pureza do Pure Bloom com a calma do Calm Vibes. Um jardim de tranquilidade.", fragranceIds: ["pure-bloom", "calm-vibes"] },
-            { id: "vibe-terrosa", mood: "Equilíbrio", name: "Vibe Terrosa", description: "O contraste perfeito entre terra e céu. A profundidade do Patch Crew encontra a leveza do Citrus Pop.", fragranceIds: ["patch-crew", "citrus-pop"] },
-            { id: "nature-mode", mood: "Conexão", name: "Nature Mode", description: "Floresta e água em harmonia. O frescor aquático do Lótus Up com a força amadeirada do Wood Rush.", fragranceIds: ["lotus-up", "wood-rush"] },
-            { id: "jardim-secreto", mood: "Mistério", name: "Jardim Secreto", description: "Flores escondidas na terra. O jasmin delicado do Pure Bloom dança com a profundidade terrosa do Patch Crew.", fragranceIds: ["patch-crew", "pure-bloom"] },
-            { id: "doce-tentacao", mood: "Sedução", name: "Doce Tentação", description: "Pura gostosura. O frutado suculento do Juicy Glow mergulha no creme da Vanilla Haze. Irresistível.", fragranceIds: ["juicy-glow", "vanilla-haze"] },
-            { id: "festa-chic", mood: "Celebração", name: "Festa Chic", description: "Champagne e frutas vermelhas. O brilho festivo do Shine On com a doçura vibrante do Juicy Glow.", fragranceIds: ["shine-on", "juicy-glow"] },
-            { id: "luxo-total", mood: "Poder", name: "Luxo Total", description: "A tríade do luxo. Especiarias exóticas, madeira nobre e champagne. Para quem não passa despercebido.", fragranceIds: ["velvet-aura", "wood-rush", "shine-on"] },
-            { id: "seducao-suprema", mood: "Sensualidade", name: "Sedução Suprema", description: "A combinação mais irresistível. Especiarias quentes, frutas doces e creme de baunilha. Pura atração.", fragranceIds: ["velvet-aura", "juicy-glow", "vanilla-haze"] },
-            
-            // COMBINAÇÕES ANTIGAS MANTIDAS (6 melhores)
-            { id: "boss-mode", mood: "Poder", name: "Boss Mode", description: "Presença marcante. O brilho do Citrus Pop com a força do Wood Rush. Impossível ignorar.", fragranceIds: ["citrus-pop", "wood-rush"] },
-            { id: "vip-access", mood: "Luxo", name: "VIP Access", description: "Luxo e atração. O glamour borbulhante do Shine On com a intensidade opulenta do Velvet Aura.", fragranceIds: ["shine-on", "velvet-aura"] },
-            { id: "main-character", mood: "Confiança", name: "Main Character", description: "O contraste do Wood Rush com o Velvet Aura exótico. Uma vibração poderosa para ser o centro das atenções.", fragranceIds: ["wood-rush", "velvet-aura"] },
-            { id: "alma-calma", mood: "Mindfulness", name: "Alma Calma", description: "A combinação perfeita para meditar. O Patch Crew centra a mente e o Calm Vibes alivia a tensão.", fragranceIds: ["patch-crew", "calm-vibes"] },
-            { id: "terra-firme", mood: "Confiança", name: "Terra Firme", description: "A solidez do Wood Rush com a profundidade terrosa do Patch Crew. Para dias que pedem pés no chão.", fragranceIds: ["wood-rush", "patch-crew"] },
-            { id: "citrus-drip", mood: "Aconchego", name: "Citrus Drip", description: "Uma energia doce e vibrante. O azedinho vibrante do Citrus Pop com o creme da Vanilla Haze.", fragranceIds: ["citrus-pop", "vanilla-haze"] }
+            { id: "citrus-pop", name: "Citrus Pop", category: "Energia", icon: "🍊", selo: "/selo-energia.png", description: "Vibrante e solar. Notas cítricas explosivas." },
+            { id: "lotus-up", name: "Lótus Up", category: "Energia", icon: "🪷", selo: "/selo-energia.png", description: "Zen-ativo. Menta aquática e lótus sagrada." },
+            { id: "vanilla-haze", name: "Vanilla Haze", category: "Sedução", icon: "🍦", selo: "/selo-seducao.png", description: "Gourmand sofisticado. Baunilha cremosa, não enjoativa." },
+            { id: "shine-on", name: "Shine On", category: "Sedução", icon: "🥂", selo: "/selo-seducao.png", description: "Efeito Champagne. Frutas efervescentes e brilho." },
+            { id: "velvet-aura", name: "Velvet Aura", category: "Sedução", icon: "✨", selo: "/selo-seducao.png", description: "Especiarias quentes. O toque de mistério na pele." },
+            { id: "wood-rush", name: "Wood Rush", category: "Autoestima", icon: "🌲", selo: "/selo-autoestima.png", description: "Madeiras nobres. A estrutura que sustenta o look." },
+            // Aqui ajustei o icone para aceitar a imagem que você tem
+            { id: "juicy-glow", name: "Juicy Glow", category: "Autoestima", icon: "<img src='/juicy-glow-new.png'>", selo: "/selo-autoestima.png", description: "Suculência pura. Frutas vermelhas e magnetismo." },
+            { id: "calm-vibes", name: "Calm Vibes", category: "Relaxamento", icon: "💜", selo: "/selo-relaxamento.png", description: "Lavanda francesa moderna. Limpeza mental." },
+            { id: "pure-bloom", name: "Pure Bloom", category: "Alegria", icon: "🌸", selo: "/selo-alegria.png", description: "Floral branco. Jasmin puro e elegância." },
+            { id: "patch-crew", name: "Patch Crew", category: "Mindfulness", icon: "🍂", selo: "/selo-mindfulness.png", description: "Terroso doce. Conexão com o agora." }
         ];
 
-        // State
+        const combinations = [
+             { id: "good-vibes-only", mood: "Energia", name: "Good Vibes Only", description: "O antídoto para dias cinzas. Frescor aquático e cítrico.", fragranceIds: ["lotus-up", "citrus-pop"] },
+            { id: "foco-total", mood: "Mindfulness", name: "Foco Total", description: "Acalma a mente e firma os pés no chão.", fragranceIds: ["calm-vibes", "wood-rush"] },
+            { id: "zen-garden", mood: "Serenidade", name: "Zen Garden", description: "Um jardim de tranquilidade em meio ao caos.", fragranceIds: ["pure-bloom", "calm-vibes"] },
+            { id: "doce-tentacao", mood: "Sedução", name: "Doce Tentação", description: "Suculento, cremoso e absolutamente irresistível.", fragranceIds: ["juicy-glow", "vanilla-haze"] },
+            { id: "luxo-total", mood: "Poder", name: "Luxo Total", description: "Cheiro de quem assina o cheque. Madeira, especiarias e ouro.", fragranceIds: ["velvet-aura", "wood-rush", "shine-on"] },
+            { id: "boss-mode", mood: "Poder", name: "Boss Mode", description: "Chegue antes de entrar na sala. Presença marcante.", fragranceIds: ["citrus-pop", "wood-rush"] }
+        ];
+
         let selectedFragrances = [];
 
-        // Render Fragrâncias
+        // --- RENDERIZADORES ---
+        
         function renderAromas() {
             const grid = document.getElementById('aromasGrid');
             grid.innerHTML = fragrances.map(f => `
-                <div class="card ${f.comingSoon ? 'card-coming-soon' : ''}">
-                    ${f.comingSoon ? '<div class="badge-coming-soon">EM BREVE</div>' : ''}
-                    ${f.selo ? `<img src="${f.selo}" class="card-selo" alt="Selo ${f.category}">` : ''}
-                    <div class="card-header" style="background: linear-gradient(to right, ${f.color.replace('from-', '#').replace(' to-', ', #')});"></div>
-                    <div class="card-body">
-                        <div class="card-badge" style="background: linear-gradient(to right, ${f.color.replace('from-', '#').replace(' to-', ', #')});">
-                            ${f.category}
-                        </div>
-                        <div class="card-icon">${f.icon}</div>
-                        <h3 class="card-title" style="${f.comingSoon ? 'color: var(--primary);' : ''}">${f.name}</h3>
-                        <p class="card-description">${f.description}</p>
+                <div class="card">
+                    ${f.selo ? `<img src="${f.selo}" class="card-selo" alt="Mood" onerror="this.style.display='none'">` : ''}
+                    <div class="card-icon">${f.icon}</div>
+                    <span class="card-category">${f.category}</span>
+                    <h3 class="card-title">${f.name}</h3>
+                    <p class="card-desc">${f.description}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderVibes() {
+            const grid = document.getElementById('vibesGrid');
+            grid.innerHTML = combinations.map(c => `
+                <div class="card" style="border-color: var(--accent-gold);">
+                    <span class="card-category" style="color: var(--text-primary);">Mood: ${c.mood}</span>
+                    <h3 class="card-title" style="font-style: italic;">${c.name}</h3>
+                    <p class="card-desc">${c.description}</p>
+                    <div style="margin-top: 1rem; font-size: 0.8rem; color: var(--accent-gold);">
+                        ${c.fragranceIds.map(id => fragrances.find(f => f.id === id).name).join(' + ')}
                     </div>
                 </div>
             `).join('');
         }
 
-        // Render Vibes
-        function renderVibes() {
-            const grid = document.getElementById('vibesGrid');
-            grid.innerHTML = combinations.map(v => {
-                const frags = v.fragranceIds.map(id => fragrances.find(f => f.id === id));
-                return `
-                    <div class="vibe-card">
-                        <div class="vibe-mood">MOOD: ${v.mood}</div>
-                        <h3 class="vibe-name">${v.name}</h3>
-                        <p class="vibe-description">${v.description}</p>
-                        <div class="vibe-fragrances">
-                            ${frags.map((f, i) => `
-                                <div class="vibe-frag">
-                                    <span class="vibe-frag-icon">${f.icon}</span>
-                                    <span class="vibe-frag-name">${f.name}</span>
-                                </div>
-                                ${i < frags.length - 1 ? '<span class="plus-sign">+</span>' : ''}
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Render Selector
         function renderSelector() {
             const grid = document.getElementById('selectorGrid');
-            const available = fragrances.filter(f => !f.comingSoon);
-            grid.innerHTML = available.map(f => `
-                <button 
-                    class="selector-btn ${selectedFragrances.includes(f.id) ? 'selected' : ''}"
-                    onclick="toggleFragrance('${f.id}')"
-                    ${selectedFragrances.length >= 3 && !selectedFragrances.includes(f.id) ? 'disabled' : ''}
-                >
+            grid.innerHTML = fragrances.map(f => `
+                <button class="selector-btn ${selectedFragrances.includes(f.id) ? 'selected' : ''}" 
+                        onclick="toggleFragrance('${f.id}')"
+                        ${selectedFragrances.length >= 3 && !selectedFragrances.includes(f.id) ? 'disabled' : ''}>
                     <div class="selector-icon">${f.icon}</div>
-                    <div class="selector-name">${f.name}</div>
+                    <span class="selector-name">${f.name}</span>
                 </button>
             `).join('');
         }
 
-        // Toggle Fragrance
-        function toggleFragrance(id) {
-            if (selectedFragrances.includes(id)) {
-                selectedFragrances = selectedFragrances.filter(f => f !== id);
-            } else {
-                if (selectedFragrances.length < 3) {
-                    selectedFragrances.push(id);
-                }
-            }
-            updateSelection();
-        }
-
-        // Update Selection
-        function updateSelection() {
-            renderSelector();
-            updateHint();
-            renderResult();
-        }
-
-        // Update Hint
-        function updateHint() {
-            const hint = document.getElementById('selectionHint');
-            const count = selectedFragrances.length;
-            if (count === 0) hint.textContent = 'Selecione 2 ou 3 aromas';
-            else if (count === 1) hint.textContent = 'Selecione mais 1 ou 2 aromas';
-            else if (count === 2) hint.textContent = 'Perfeito! Você pode adicionar mais 1 aroma ou ver sua combinação';
-            else hint.textContent = 'Combinação completa! Veja o resultado abaixo';
-        }
-
-        // Render Result
         function renderResult() {
             const area = document.getElementById('resultArea');
             
             if (selectedFragrances.length === 0) {
-                area.innerHTML = `
-                    <div class="card" style="padding: 3rem; text-align: center; border: 2px dashed var(--border);">
-                        <p style="color: var(--text-muted); font-size: 1.125rem;">
-                            Selecione 2 ou 3 aromas para ver a mágica acontecer...
-                        </p>
-                    </div>
-                `;
+                area.innerHTML = '<div class="result-area"><p class="italic">O frasco está vazio. Selecione suas essências acima.</p></div>';
                 return;
             }
 
-            const selected = selectedFragrances.map(id => fragrances.find(f => f.id === id));
-            const matched = findMatchedCombination();
+            const matched = combinations.find(combo => {
+                const comboIds = [...combo.fragranceIds].sort();
+                const selectedIds = [...selectedFragrances].sort();
+                return JSON.stringify(comboIds) === JSON.stringify(selectedIds);
+            });
+
+            const selectedObjs = selectedFragrances.map(id => fragrances.find(f => f.id === id));
 
             area.innerHTML = `
-                <div class="result-card ${matched ? 'matched' : ''}">
-                    ${matched ? `
-                        <div class="match-banner">
-                            <div class="match-title">
-                                <span class="sparkle">✨</span>
-                                UAU! VOCÊ DESCOBRIU UMA VIBE SUGERIDA!
-                                <span class="sparkle">✨</span>
-                            </div>
-                            <p style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">${matched.name}</p>
-                            <p style="font-size: 0.875rem; font-weight: 600; color: var(--primary); margin-bottom: 1rem;">MOOD: ${matched.mood}</p>
-                            <p style="color: var(--text-muted);">${matched.description}</p>
-                        </div>
-                    ` : ''}
+                <div class="result-area" style="border-color: ${matched ? 'var(--accent-gold)' : '#ddd'}; background: ${matched ? '#fff' : '#fafafa'};">
+                    ${matched ? `<h3 style="color: var(--accent-gold); font-size: 2rem;">${matched.name}</h3>` : '<h3 style="font-size: 1.5rem;">Sua Criação Única</h3>'}
                     
-                    <div class="selected-icons">
-                        ${selected.map((f, i) => `
-                            <span class="selected-icon">${f.icon}</span>
-                            ${i < selected.length - 1 ? '<span class="plus-sign">+</span>' : ''}
-                        `).join('')}
+                    <div style="display: flex; justify-content: center; gap: 1rem; margin: 1.5rem 0; font-size: 2rem;">
+                        ${selectedObjs.map(f => `<span>${f.icon}</span>`).join('<span style="font-size: 1rem; align-self: center;">+</span>')}
                     </div>
 
-                    ${!matched ? `
-                        <h4 style="font-size: 2rem; font-weight: 900; margin-bottom: 1rem;" class="gradient-text">
-                            Sua Combinação Única
-                        </h4>
-                        <div style="margin-bottom: 1.5rem;">
-                            ${selected.map(f => `
-                                <p style="margin-bottom: 0.5rem;">
-                                    <strong style="color: var(--primary);">${f.name}</strong> (${f.category})
-                                </p>
-                            `).join('')}
-                        </div>
-                        ${selectedFragrances.length >= 2 ? `
-                            <div style="background: rgba(10, 10, 15, 0.5); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.5rem;">
-                                <p style="color: var(--text-muted);">
-                                    ${selectedFragrances.length === 2 
-                                        ? 'Uma combinação equilibrada que une o melhor de dois mundos. Perfeita para quem busca uma fragrância versátil e única.'
-                                        : 'Uma combinação complexa e sofisticada! Três camadas de personalidade que criam uma experiência olfativa inesquecível.'}
-                                </p>
-                            </div>
-                        ` : ''}
-                    ` : ''}
+                    <p class="italic" style="color: var(--text-secondary);">
+                        ${matched ? matched.description : 'Uma alquimia exclusiva criada por você. Experimente na pele.'}
+                    </p>
 
-                    <div class="result-actions">
-                        <button class="btn btn-outline" onclick="clearSelection()">
-                            🔄 Tentar Outra
-                        </button>
-                        <button class="btn">
-                            🛒 Comprar Esta
-                        </button>
-                    </div>
+                    <button class="btn-primary" style="margin-top: 2rem;" onclick="alert('Função de checkout seria aberta aqui!')">
+                        Adicionar ao Carrinho
+                    </button>
+                    
+                    ${selectedFragrances.length > 0 ? `<div style="margin-top: 1rem;"><a href="javascript:void(0)" onclick="selectedFragrances=[]; renderSelector(); renderResult();" style="font-size: 0.7rem; color: #999;">LIMPAR MISTURA</a></div>` : ''}
                 </div>
             `;
         }
 
-        // Find Matched Combination
-        function findMatchedCombination() {
-            if (selectedFragrances.length < 2) return null;
-            
-            return combinations.find(combo => {
-                const comboIds = [...combo.fragranceIds].sort();
-                const selectedIds = [...selectedFragrances].sort();
-                return comboIds.length === selectedIds.length &&
-                       comboIds.every((id, i) => id === selectedIds[i]);
-            });
+        // --- LÓGICA ---
+        function toggleFragrance(id) {
+            if (selectedFragrances.includes(id)) {
+                selectedFragrances = selectedFragrances.filter(f => f !== id);
+            } else {
+                if (selectedFragrances.length < 3) selectedFragrances.push(id);
+            }
+            renderSelector();
+            renderResult();
         }
 
-        // Clear Selection
-        function clearSelection() {
-            selectedFragrances = [];
-            updateSelection();
-        }
-
-        // Toggle Mobile Menu
-        function toggleMenu() {
-            const menu = document.getElementById('menu');
-            menu.classList.toggle('active');
-        }
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // Close mobile menu
-                    document.getElementById('menu').classList.remove('active');
-                }
-            });
-        });
-
-        // Initialize
+        // --- INICIALIZAÇÃO ---
         renderAromas();
         renderVibes();
         renderSelector();
         renderResult();
 
-        // Register Service Worker for PWA
+        // PWA Service Worker
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then((registration) => {
-                        console.log('Service Worker registered:', registration);
-                    })
-                    .catch((error) => {
-                        console.log('Service Worker registration failed:', error);
-                    });
-            });
+            window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
         }
     </script>
 </body>
