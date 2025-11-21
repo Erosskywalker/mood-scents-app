@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mood Scents | Neuro Science Lab</title>
+    <title>Mood Scents | Laboratório de Neurociência</title>
     
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -12,7 +12,7 @@
     })(window,document,'script','dataLayer','GTM-SEU-ID-AQUI');</script>
     
     <meta name="theme-color" content="#050505">
-    <meta name="description" content="Neuro-Fragrâncias. Misture e descubra.">
+    <meta name="description" content="Neuro-Fragrâncias. Misture e descubra seu mood.">
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/png" href="/logo.png">
     
@@ -22,7 +22,7 @@
     
     <style>
         :root {
-            /* DARK MODE VIBRANTE */
+            /* DARK MODE VIBRANTE (Mantendo a estética aprovada) */
             --bg-body: #050505; 
             --card-bg: #111;
             --text-primary: #FFF;
@@ -73,7 +73,7 @@
 
         .hero h1 { font-size: clamp(3rem, 10vw, 5rem); line-height: 1; margin-bottom: 1rem; }
         .hero h1 span { color: var(--neon-yellow); font-style: italic; }
-        .hero p { color: #888; max-width: 400px; margin: 0 auto 2rem; }
+        .hero p { color: #888; max-width: 400px; margin: 0 auto 2rem; font-size: 1.1rem; line-height: 1.4; }
 
         .btn-primary {
             background: var(--neon-yellow); color: #000;
@@ -102,7 +102,7 @@
             position: absolute; top: -10px; right: -10px; width: 55px; height: 55px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             font-size: 0.6rem; font-weight: 900; color: #000; transform: rotate(15deg);
-            z-index: 10; box-shadow: 0 0 10px currentColor;
+            z-index: 10; box-shadow: 0 0 10px currentColor; text-transform: uppercase;
         }
 
         .card-icon { font-size: 2.5rem; margin-bottom: 1rem; }
@@ -161,8 +161,8 @@
         <div class="container">
             <div class="logo">MoodScents</div>
             <div class="menu-desktop">
-                <a href="#collection">Wardrobe</a>
-                <a href="#lab">The Lab</a>
+                <a href="#collection">Coleção</a>
+                <a href="#lab">Laboratório</a>
             </div>
         </div>
     </nav>
@@ -170,31 +170,31 @@
     <header class="hero">
         <div class="hero-glow"></div>
         <div class="container">
-            <h1>Hack Your<br><span>Chemistry.</span></h1>
-            <p>Fragrâncias neurocientíficas. Misture no Lab e descubra os combos secretos.</p>
+            <h1>Hackeie sua<br><span>Química.</span></h1>
+            <p>A primeira linha de neuro-fragrâncias projetada para layering. Misture no Lab e controle seu estado de espírito.</p>
             <a href="#lab" class="btn-primary">ENTRAR NO LAB 🧪</a>
         </div>
     </header>
 
     <section id="collection">
         <div class="container">
-            <h2 class="section-title">Scent <span>Wardrobe</span></h2>
+            <h2 class="section-title">Guarda-Roupa <span>Olfativo</span></h2>
             <div class="grid" id="aromasGrid"></div>
         </div>
     </section>
 
     <section id="lab">
         <div class="container">
-            <h2 class="section-title">Neuro <span>Lab</span></h2>
-            <p style="text-align: center; margin-bottom: 2rem; color: #666; font-size: 0.9rem;">
-                Selecione até 3 bases para ativar o algoritmo.
+            <h2 class="section-title">Laboratório <span>Neuro</span></h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: #888; font-size: 0.9rem;">
+                Selecione até 3 bases para ativar a alquimia.
             </p>
             
             <div class="selector-grid" id="selectorGrid"></div>
             
             <div id="resultArea">
                 <div style="text-align: center; padding: 3rem; border: 1px dashed #333; border-radius: 20px; color: #555;">
-                    👆 Selecione as fragrâncias acima
+                    👆 Selecione suas fragrâncias acima
                 </div>
             </div>
         </div>
@@ -203,70 +203,65 @@
     <footer>
         <div class="container">
             <p>MOOD SCENTS ® | UNINOVA</p>
+            <p>Tecnologia IFF & LMR Naturals</p>
         </div>
     </footer>
 
     <script>
-        // --- DADOS TÉCNICOS ESTRITAMENTE BASEADOS NO PDF IFF ---
-        
-        // Cores mapeadas para os Efeitos do PDF:
-        // Energia = Amarelo Neon (#CCFF00) [cite: 420]
-        // Sedução = Pink Neon (#FF00FF) [cite: 426]
-        // Relaxamento = Roxo (#9966FF) [cite: 408]
-        // Autoestima = Azul Neon (#0044FF) [cite: 429]
-        // Mindfulness/Alegria = Laranja/Dourado (#FFaa00) [cite: 414]
+        // --- DADOS TÉCNICOS ESTRITAMENTE BASEADOS NO PDF IFF [cite: 397-456] ---
+        // Traduzidos e Localizados
 
         const fragrances = [
-            // [cite: 298, 301] Cítricos -> Energia
+            // Cítricos -> Energia
             { id: "citrus", name: "Citrus Pop", effect: "Energia", icon: "🍋", color: "#CCFF00", desc: "Explosão solar para despertar." },
             
-            // [cite: 248, 252] Baunilha -> Sedução (Oriental Gourmand)
-            { id: "vanilla", name: "Vanilla Haze", effect: "Sedução", icon: "🍦", color: "#FF00FF", desc: "Baunilha oriental viciante." },
+            // Baunilha -> Sedução
+            { id: "vanilla", name: "Vanilla Haze", effect: "Sedução", icon: "🍦", color: "#FF00FF", desc: "Baunilha cremosa e viciante." },
             
-            // [cite: 361, 365] Champagne -> Sedução
-            { id: "shine", name: "Shine On", effect: "Sedução", icon: "🥂", color: "#FF00FF", desc: "Efervescência e autoconfiança." },
+            // Champagne -> Sedução
+            { id: "shine", name: "Shine On", effect: "Sedução", icon: "🥂", color: "#FF00FF", desc: "Confiança efervescente." },
             
-            // [cite: 336, 341] Amadeirado -> Autoestima
-            { id: "wood", name: "Wood Rush", effect: "Autoestima", icon: "🌲", color: "#0044FF", desc: "Presença de couro e madeira." },
+            // Amadeirado -> Autoestima
+            { id: "wood", name: "Wood Rush", effect: "Autoestima", icon: "🌲", color: "#0044FF", desc: "Presença e postura de comando." },
             
-            // [cite: 220] Lavanda -> Relaxamento
-            { id: "calm", name: "Calm Vibes", effect: "Relax", icon: "🧘‍♀️", color: "#9966FF", desc: "Comprovado pelo Sleep Center." },
+            // Lavanda -> Relaxamento
+            { id: "calm", name: "Calm Vibes", effect: "Relax", icon: "🧘‍♀️", color: "#9966FF", desc: "Comprovado: desliga o stress." },
             
-            // [cite: 232, 236] Oriental -> Sedução
-            { id: "velvet", name: "Velvet Aura", effect: "Sedução", icon: "🔮", color: "#FF00FF", desc: "Especiarias profundas e quentes." },
+            // Oriental -> Sedução
+            { id: "velvet", name: "Velvet Aura", effect: "Sedução", icon: "🔮", color: "#FF00FF", desc: "Mistério profundo e quente." },
             
-            // [cite: 349, 353] Patchouli & Baunilha -> Mindfulness
-            { id: "patch", name: "Patch Crew", effect: "Mindfulness", icon: "🍂", color: "#FFaa00", desc: "Aterramento e foco profundo." },
+            // Patchouli & Baunilha -> Mindfulness
+            { id: "patch", name: "Patch Crew", effect: "Mindfulness", icon: "🍂", color: "#FFaa00", desc: "Foco, terra e presença." },
             
-            // [cite: 273, 277] Lótus & Menta -> Energia
-            { id: "lotus", name: "Lótus Up", effect: "Energia", icon: "🪷", color: "#CCFF00", desc: "Frescor aquático mental." },
+            // Lótus & Menta -> Energia
+            { id: "lotus", name: "Lótus Up", effect: "Energia", icon: "🪷", color: "#CCFF00", desc: "Frescor para clareza mental." },
             
-            // [cite: 309, 315] Frutal -> Autoestima
-            { id: "juicy", name: "Juicy Glow", effect: "Autoestima", icon: "🍒", color: "#0044FF", desc: "Glow jovem e radiante." },
+            // Frutal -> Autoestima
+            { id: "juicy", name: "Juicy Glow", effect: "Autoestima", icon: "🍒", color: "#0044FF", desc: "Sua melhor versão radiante." },
             
-            // [cite: 284, 289] Jasmim -> Alegria
-            { id: "bloom", name: "Pure Bloom", effect: "Alegria", icon: "🌸", color: "#FFaa00", desc: "Ativa a área da felicidade." }
+            // Jasmim -> Alegria
+            { id: "bloom", name: "Pure Bloom", effect: "Alegria", icon: "🌸", color: "#FFaa00", desc: "Ativa o sorriso instantâneo." }
         ];
 
-        // --- COMBINAÇÕES (PÁGINA 30 DO PDF)  ---
+        // --- COMBINAÇÕES SECRETAS (Gamificação Baseada na Página 30 do PDF) ---
         const secretCombos = [
-            //  Lótus + Cítrico -> Relaxamento
-            { ids: ["lotus", "citrus"], mood: "Relaxamento", title: "Surprise Chill", desc: "Incrível! O PDF revela que esta mistura cítrica e mentolada ativa o relaxamento." },
+            // Lótus + Cítrico -> Relaxamento [cite: 409]
+            { ids: ["lotus", "citrus"], mood: "Relaxamento", title: "Chill Surprise", desc: "Incrível! A ciência mostra que esta mistura cítrica e mentolada ativa o relaxamento profundo." },
             
-            // [cite: 417] Lavanda + Amadeirado -> Mindfulness
-            { ids: ["calm", "wood"], mood: "Mindfulness", title: "Zen Focus", desc: "O equilíbrio perfeito entre calma e presença." },
+            // Lavanda + Amadeirado -> Mindfulness [cite: 417]
+            { ids: ["calm", "wood"], mood: "Mindfulness", title: "Zen Focus", desc: "O equilíbrio perfeito entre a calma da lavanda e a força da madeira." },
             
-            // [cite: 434] Cítrico (Limão) + Frutal -> Autoestima
-            { ids: ["citrus", "juicy"], mood: "Autoestima", title: "Glow Up", desc: "Energia solar com suculência. Boost de confiança instantâneo." },
+            // Cítrico (Limão) + Frutal -> Autoestima [cite: 434]
+            { ids: ["citrus", "juicy"], mood: "Autoestima", title: "Glow Up Solar", desc: "Energia solar com suculência. Um boost de confiança instantâneo." },
             
-            //  Patchouli/Baunilha + Jasmim -> Energia
-            { ids: ["patch", "bloom"], mood: "Energia", title: "Power Flower", desc: "Uma surpresa da neurociência: Florais terrosos que energizam." },
+            // Patchouli + Jasmim -> Energia [cite: 424]
+            { ids: ["patch", "bloom"], mood: "Energia", title: "Power Flower", desc: "Surpresa da neurociência: Florais terrosos que energizam seu dia." },
             
-            // [cite: 441] Jasmim + Champagne -> Sedução
-            { ids: ["bloom", "shine"], mood: "Sedução", title: "Golden Night", desc: "O brilho do champagne com o magnetismo do jasmim." },
+            // Jasmim + Champagne -> Sedução [cite: 441]
+            { ids: ["bloom", "shine"], mood: "Sedução", title: "Noite de Ouro", desc: "O brilho do champagne com o magnetismo floral do jasmim." },
             
-            // [cite: 439] Cítrico (Limão) + Baunilha -> Energia
-            { ids: ["citrus", "vanilla"], mood: "Energia", title: "Sweet Energy", desc: "Contraste viciante que desperta os sentidos." }
+            // Cítrico + Baunilha -> Energia [cite: 439]
+            { ids: ["citrus", "vanilla"], mood: "Energia", title: "Doce Energia", desc: "O contraste viciante que desperta todos os sentidos." }
         ];
 
         let selected = [];
@@ -322,10 +317,10 @@
             let boxClass = 'result-box';
 
             if (match) {
-                // JACKPOT!
+                // JACKPOT! (Gamificação)
                 boxClass += ' boom';
                 html = `
-                    <h2 style="color:${getColorForMood(match.mood)}; margin-bottom:0.5rem;">BOOM! 💥</h2>
+                    <h2 style="color:${getColorForMood(match.mood)}; margin-bottom:0.5rem;">BOOM! MATCH! 💥</h2>
                     <div style="background:${getColorForMood(match.mood)}; color:#000; display:inline-block; padding:5px 15px; border-radius:20px; font-weight:900; font-size:0.8rem; text-transform:uppercase;">
                         Desbloqueado: ${match.mood}
                     </div>
@@ -338,19 +333,19 @@
                 const effects = items.map(i => i.effect);
                 const uniqueDesc = effects.length > 1 
                     ? `Você fundiu as frequências de <strong>${effects.join(' + ')}</strong>.` 
-                    : `Foco puro na frequência de <strong>${effects[0]}</strong>.`;
+                    : `Foco total na frequência de <strong>${effects[0]}</strong>.`;
 
                 html = `
-                    <h3 style="color:#fff; margin-bottom:1rem;">Alquimia Customizada</h3>
+                    <h3 style="color:#fff; margin-bottom:1rem;">Sua Alquimia Única</h3>
                     <div style="font-size:2.5rem; margin-bottom:1rem;">${icons}</div>
-                    <p class="alchemy-desc">${uniqueDesc} <br>Uma assinatura olfativa que só você tem.</p>
+                    <p class="alchemy-desc">${uniqueDesc} <br>Uma assinatura olfativa exclusiva sua.</p>
                     <p style="font-size:0.7rem; color:#666; text-transform:uppercase;">Mix: ${names}</p>
                 `;
             }
 
             html += `
-                <button class="btn-primary" onclick="checkout('${match ? match.title : 'Mix Custom'}')">GARANTIR MEU KIT 🛍️</button>
-                <div style="margin-top:15px; text-decoration:underline; font-size:0.8rem; color:#555; cursor:pointer;" onclick="reset()">Limpar Lab</div>
+                <button class="btn-primary" onclick="checkout('${match ? match.title : 'Mix Único'}')">GARANTIR MEU KIT 🛍️</button>
+                <div style="margin-top:15px; text-decoration:underline; font-size:0.8rem; color:#555; cursor:pointer;" onclick="reset()">Limpar Laboratório</div>
             `;
 
             area.innerHTML = `<div class="${boxClass}">${html}</div>`;
