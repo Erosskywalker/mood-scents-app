@@ -1,459 +1,795 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mood Scents | Neurociência & Identidade</title>
+<!-- saved from url=(0157)https://www.genspark.ai/api/code_sandbox_light/preview/21ca5a5d-ce16-41d3-8c42-f9831178f884/index.html?canvas_history_id=0cc834d9-0f0a-4751-9502-6a620498b591 -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id=GTM-SEU-ID-AQUI'+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-SEU-ID-AQUI');</script>
-    
-    <!-- PWA Setup -->
-    <meta name="theme-color" content="#050505">
-    <meta name="description" content="Mood Scents. Fragrâncias veganas para criar sua identidade única.">
-    <link rel="manifest" href="/manifest.json">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Scents - Sua Vibe, Seu Cheiro</title>
+    <script src="./saved_resource"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./css2" rel="stylesheet">
     <style>
-        :root {
-            /* DARK MODE VIBRANTE */
-            --bg-body: #050505; 
-            --card-bg: #111;
-            --text-primary: #FFF;
-            
-            /* Cores de Identidade */
-            --neon-yellow: #CCFF00;
-            --neon-pink: #FF00FF;
-            --neon-blue: #0044FF;
-            --neon-purple: #9D00FF;
-            
-            --font-serif: 'Cormorant Garamond', serif;
-            --font-sans: 'Inter', sans-serif;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
         body {
-            font-family: var(--font-sans);
-            background-color: var(--bg-body);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            padding-bottom: 20px;
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            color: #F3F4F6;
         }
-
-        /* Navbar Otimizada */
-        nav {
-            position: fixed; top: 0; width: 100%; padding: 1rem 0;
-            background: rgba(5,5,5,0.95); backdrop-filter: blur(12px);
-            z-index: 100; border-bottom: 1px solid #222;
+        .gradient-text {
+            background: linear-gradient(90deg, #EC4899, #8B5CF6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
         }
-        nav .container { display: flex; justify-content: space-between; align-items: center; }
-        
-        .logo { font-weight: 900; letter-spacing: 0.5px; text-transform: uppercase; color: #fff; font-size: 1.1rem; }
-        
-        .menu-desktop { display: flex; gap: 1.5rem; }
-        .menu-desktop a { 
-            color: #ccc; text-decoration: none; font-size: 0.75rem; 
-            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-            transition: color 0.3s; padding: 5px 0;
+        .glow-button {
+            box-shadow: 0 0 10px #EC4899, 0 0 20px #8B5CF6;
+            transition: all 0.3s ease-in-out;
         }
-        .menu-desktop a:hover, .menu-desktop a.highlight { color: var(--neon-yellow); }
-        .menu-desktop a.highlight { border-bottom: 2px solid var(--neon-yellow); }
-
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem; }
-
-        /* Hero */
-        .hero {
-            min-height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; position: relative; padding-top: 60px;
+        .glow-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px #EC4899, 0 0 30px #8B5CF6;
         }
-        .hero-glow {
-            position: absolute; width: 300px; height: 300px; 
-            background: radial-gradient(circle, var(--neon-blue), transparent 70%);
-            filter: blur(120px); z-index: -1; opacity: 0.3; animation: pulse 6s infinite alternate;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
-        @keyframes pulse { from { opacity: 0.2; transform: scale(0.9); } to { opacity: 0.5; transform: scale(1.1); } }
-
-        .hero h1 { font-size: clamp(3rem, 10vw, 5.5rem); line-height: 1; margin-bottom: 1rem; font-family: var(--font-serif); }
-        .hero h1 span { color: var(--neon-yellow); font-style: italic; }
-        .hero p { color: #999; max-width: 450px; margin: 0 auto 2.5rem; font-size: 1.1rem; line-height: 1.5; font-weight: 300; }
-
-        /* Botão Show */
-        .btn-primary {
-            background: var(--neon-yellow); color: #000;
-            padding: 1rem 2.5rem; border-radius: 50px; font-weight: 800; text-transform: uppercase;
-            text-decoration: none; border: none; cursor: pointer; transition: 0.2s;
-            box-shadow: 0 0 25px rgba(204, 255, 0, 0.2); display: inline-flex; align-items: center; gap: 10px;
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .btn-primary:hover { transform: translateY(-3px); background: #fff; box-shadow: 0 0 40px rgba(255,255,255,0.4); }
-
-        /* Seções */
-        section { padding: 5rem 0; border-bottom: 1px solid #111; }
-        .section-title { font-size: 2.2rem; text-align: center; margin-bottom: 3rem; text-transform: uppercase; letter-spacing: -1px; }
-        .section-title span { color: var(--neon-pink); font-family: var(--font-serif); text-transform: none; letter-spacing: 0; }
-
-        /* Grid Fragrâncias */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.5rem; }
-        
-        .card {
-            background: #0f0f0f; border: 1px solid #222; border-radius: 16px; padding: 1.5rem 1rem;
-            text-align: center; position: relative; transition: 0.3s; min-height: 280px;
-            display: flex; flex-direction: column; justify-content: space-between;
+        .scent-card.selected {
+            border-color: #EC4899;
+            box-shadow: 0 0 15px #EC4899;
         }
-        .card:hover { border-color: var(--neon-blue); transform: translateY(-5px); }
-        
-        .sticker {
-            position: absolute; top: -12px; right: -10px; width: 60px; height: 60px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 0.6rem; font-weight: 900; color: #000; transform: rotate(15deg);
-            z-index: 10; border: 2px solid #fff; text-transform: uppercase; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        /* Remove fundo preto dos vetores */
+        .scent-icon {
+            mix-blend-mode: lighten;
+            filter: brightness(1.1);
         }
-        .card-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-        .card h3 { font-size: 1.1rem; margin-bottom: 8px; color: #fff; font-weight: 700; }
-        .card p { font-size: 0.8rem; color: #777; line-height: 1.4; }
-
-        /* Vibes Sugeridas (Recipes) */
-        .recipes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-        .recipe-card {
-            background: linear-gradient(145deg, #111, #0a0a0a); border: 1px solid #222; border-radius: 12px;
-            padding: 1.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem; transition: 0.2s; cursor: pointer;
+        .logo-container {
+            height: 50px;
+            display: flex;
+            align-items: center;
         }
-        .recipe-card:hover { border-color: var(--neon-pink); transform: translateY(-3px); }
-        .recipe-icon { font-size: 2rem; letter-spacing: 5px; }
-        .recipe-info h4 { color: var(--neon-pink); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 1px; font-weight: 800; }
-        .recipe-info h3 { color: #fff; font-size: 1.2rem; margin-bottom: 4px; font-family: var(--font-serif); }
-        .recipe-info p { font-size: 0.75rem; color: #666; }
-
-        /* The Lab */
-        #lab { background: #080808; position: relative; min-height: 90vh; }
-        .selector-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 2.5rem; }
-        
-        .selector-btn {
-            width: 85px; height: 100px; background: #151515; border: 1px solid #333;
-            border-radius: 12px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: 0.2s;
-        }
-        .selector-btn .emoji { font-size: 2rem; filter: grayscale(1) opacity(0.5); transition: 0.2s; }
-        .selector-btn .name { font-size: 0.6rem; color: #555; font-weight: 700; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-        
-        .selector-btn.selected { 
-            background: #222; border-color: var(--neon-yellow); transform: scale(1.1); box-shadow: 0 0 15px rgba(204,255,0,0.15);
-        }
-        .selector-btn.selected .emoji { filter: grayscale(0) opacity(1); }
-        .selector-btn.selected .name { color: var(--neon-yellow); }
-
-        .result-box {
-            background: #111; border: 2px solid #222; border-radius: 20px; padding: 2.5rem 1.5rem;
-            text-align: center; max-width: 500px; margin: 0 auto; transition: 0.3s;
-        }
-        
-        @keyframes boom { 
-            0% { box-shadow: 0 0 0 rgba(255,0,255,0); border-color: #222; }
-            50% { box-shadow: 0 0 40px rgba(255,0,255,0.4); border-color: var(--neon-pink); transform: scale(1.02); }
-            100% { box-shadow: 0 0 0 rgba(255,0,255,0); border-color: #222; }
-        }
-        .result-box.boom { animation: boom 1.2s ease-in-out infinite; }
-
-        /* Por Que Nós */
-        .why-us-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
-        .why-card { 
-            text-align: center; padding: 2rem; border: 1px solid #222; border-radius: 16px; background: #0c0c0c;
-            transition: 0.3s;
-        }
-        .why-card:hover { border-color: var(--neon-yellow); }
-        .why-icon { font-size: 3rem; margin-bottom: 1rem; display: inline-block; }
-        .why-title { font-size: 1.1rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; text-transform: uppercase; }
-        .why-desc { font-size: 0.9rem; color: #777; line-height: 1.5; }
-
-        /* CTA Final */
-        .cta-section { text-align: center; padding: 6rem 1rem; background: linear-gradient(0deg, #111, #050505); }
-        .cta-title { font-size: clamp(1.5rem, 5vw, 2.5rem); margin-bottom: 0.5rem; font-family: var(--font-serif); }
-        .cta-sub { color: #888; font-size: 1.1rem; margin-bottom: 2.5rem; }
-
-        /* Footer */
-        footer { background: #000; padding: 4rem 1rem; text-align: center; border-top: 1px solid #222; }
-        .footer-brand { font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem; color: #fff; }
-        .footer-info { color: #555; font-size: 0.8rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
-
-        @media (max-width: 768px) {
-            .menu-desktop { display: none; }
-            .grid { grid-template-columns: 1fr 1fr; }
-            .hero h1 { font-size: 3.2rem; }
+        .logo-container img {
+            height: 100%;
+            width: auto;
         }
     </style>
-</head>
-<body>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width: 640px){.container{max-width:640px}}@media (min-width: 768px){.container{max-width:768px}}@media (min-width: 1024px){.container{max-width:1024px}}@media (min-width: 1280px){.container{max-width:1280px}}@media (min-width: 1536px){.container{max-width:1536px}}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.left-0{left:0px}.right-0{right:0px}.top-0{top:0px}.top-24{top:6rem}.z-10{z-index:10}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.mb-12{margin-bottom:3rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mt-1{margin-top:0.25rem}.mt-2{margin-top:0.5rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}.mb-1{margin-bottom:0.25rem}.inline-block{display:inline-block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-12{height:3rem}.h-8{height:2rem}.h-14{height:3.5rem}.h-24{height:6rem}.h-28{height:7rem}.min-h-screen{min-height:100vh}.min-h-\[200px\]{min-height:200px}.w-12{width:3rem}.w-8{width:2rem}.w-full{width:100%}.w-14{width:3.5rem}.w-28{width:7rem}.max-w-2xl{max-width:42rem}.max-w-3xl{max-width:48rem}.max-w-7xl{max-width:80rem}.max-w-6xl{max-width:72rem}.flex-grow{flex-grow:1}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2{gap:0.5rem}.gap-4{gap:1rem}.gap-8{gap:2rem}.gap-10{gap:2.5rem}.space-x-6 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1.5rem * var(--tw-space-x-reverse));margin-left:calc(1.5rem * calc(1 - var(--tw-space-x-reverse)))}.self-center{align-self:center}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.border-2{border-width:2px}.border-t{border-top-width:1px}.border-gray-800{--tw-border-opacity:1;border-color:rgb(31 41 55 / var(--tw-border-opacity, 1))}.border-transparent{border-color:transparent}.bg-gray-800{--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.bg-gray-900{--tw-bg-opacity:1;background-color:rgb(17 24 39 / var(--tw-bg-opacity, 1))}.bg-gray-900\/50{background-color:rgb(17 24 39 / 0.5)}.bg-pink-500{--tw-bg-opacity:1;background-color:rgb(236 72 153 / var(--tw-bg-opacity, 1))}.bg-gray-700{--tw-bg-opacity:1;background-color:rgb(55 65 81 / var(--tw-bg-opacity, 1))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-pink-500{--tw-gradient-from:#ec4899 var(--tw-gradient-from-position);--tw-gradient-to:rgb(236 72 153 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.to-violet-600{--tw-gradient-to:#7c3aed var(--tw-gradient-to-position)}.object-contain{object-fit:contain}.p-3{padding:0.75rem}.p-8{padding:2rem}.p-2{padding:0.5rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-10{padding-left:2.5rem;padding-right:2.5rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pt-20{padding-top:5rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-6xl{font-size:3.75rem;line-height:1}.font-black{font-weight:900}.font-bold{font-weight:700}.uppercase{text-transform:uppercase}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-pink-400{--tw-text-opacity:1;color:rgb(244 114 182 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-gray-200{--tw-text-opacity:1;color:rgb(229 231 235 / var(--tw-text-opacity, 1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.\[mask-image\:radial-gradient\(ellipse_at_center\2c transparent_20\%\2c black\)\]{-webkit-mask-image:radial-gradient(ellipse at center,transparent 20%,black);mask-image:radial-gradient(ellipse at center,transparent 20%,black)}.hover\:-translate-y-2:hover{--tw-translate-y:-0.5rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:bg-pink-600:hover{--tw-bg-opacity:1;background-color:rgb(219 39 119 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-600:hover{--tw-bg-opacity:1;background-color:rgb(75 85 99 / var(--tw-bg-opacity, 1))}.hover\:text-pink-400:hover{--tw-text-opacity:1;color:rgb(244 114 182 / var(--tw-text-opacity, 1))}@media (min-width: 768px){.md\:flex{display:flex}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:text-2xl{font-size:1.5rem;line-height:2rem}.md\:text-7xl{font-size:4.5rem;line-height:1}}@media (min-width: 1024px){.lg\:w-1\/3{width:33.333333%}.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.lg\:grid-cols-5{grid-template-columns:repeat(5, minmax(0, 1fr))}.lg\:flex-row{flex-direction:row}.lg\:text-8xl{font-size:6rem;line-height:1}}</style></head>
+<body class="antialiased">
 
-    <nav>
-        <div class="container">
-            <div class="logo">MoodScents</div>
-            <div class="menu-desktop">
-                <a href="#collection">Fragrâncias</a>
-                <a href="#vibes">Vibes Sugeridas</a>
-                <a href="#lab" class="highlight">Crie seu Mood</a>
+    <!-- Cabeçalho -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-gray-900/50 backdrop-blur-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="logo-container">
+                <!-- Logo será adicionado posteriormente -->
             </div>
-        </div>
-    </nav>
-
-    <header class="hero">
-        <div class="hero-glow"></div>
-        <div class="container">
-            <h1>Sua Vibe,<br><span>Seu Aroma.</span></h1>
-            <p>Fragrâncias projetadas para layering. Misture, personalize e assuma o controle do seu estado de espírito.</p>
-            <a href="#lab" class="btn-primary">
-                CRIAR MEU MOOD <span style="font-size:1.2rem;">🧪</span>
-            </a>
+            <nav class="space-x-6 hidden md:flex">
+                <a href="https://www.genspark.ai/api/code_sandbox_light/preview/21ca5a5d-ce16-41d3-8c42-f9831178f884/index.html?canvas_history_id=0cc834d9-0f0a-4751-9502-6a620498b591#scents" class="hover:text-pink-400 transition-colors">Fragrâncias</a>
+                <a href="https://www.genspark.ai/api/code_sandbox_light/preview/21ca5a5d-ce16-41d3-8c42-f9831178f884/index.html?canvas_history_id=0cc834d9-0f0a-4751-9502-6a620498b591#moods-prontos" class="hover:text-pink-400 transition-colors">Vibes Prontas</a>
+                <a href="https://www.genspark.ai/api/code_sandbox_light/preview/21ca5a5d-ce16-41d3-8c42-f9831178f884/index.html?canvas_history_id=0cc834d9-0f0a-4751-9502-6a620498b591#mixer" class="hover:text-pink-400 transition-colors">Crie seu Mood</a>
+                <a href="https://www.genspark.ai/api/code_sandbox_light/preview/21ca5a5d-ce16-41d3-8c42-f9831178f884/index.html?canvas_history_id=0cc834d9-0f0a-4751-9502-6a620498b591#why" class="hover:text-pink-400 transition-colors">Por que Nós?</a>
+            </nav>
+            <a href="https://www.genspark.ai/api/code_sandbox_light/preview/21ca5a5d-ce16-41d3-8c42-f9831178f884/index.html?canvas_history_id=0cc834d9-0f0a-4751-9502-6a620498b591#scents" class="bg-pink-500 text-white font-bold py-2 px-4 rounded-full hover:bg-pink-600 transition-transform hover:scale-105">Comprar</a>
         </div>
     </header>
 
-    <section id="collection">
-        <div class="container">
-            <h2 class="section-title">Guarda-Roupa <span>Olfativo</span></h2>
-            <div class="grid" id="aromasGrid"></div>
-        </div>
-    </section>
-
-    <section id="vibes">
-        <div class="container">
-            <h2 class="section-title">Vibes <span>Sugeridas</span></h2>
-            <p style="text-align: center; margin-bottom: 2.5rem; color: #777;">Combinações secretas testadas pela neurociência.</p>
-            <div class="recipes-grid" id="recipesGrid"></div>
-        </div>
-    </section>
-
-    <section id="lab">
-        <div class="container">
-            <h2 class="section-title">Crie seu <span>Mood</span></h2>
-            <p style="text-align: center; margin-bottom: 2rem; color: #888;">
-                Selecione até 3 bases para ativar a alquimia no Laboratório.
-            </p>
-            
-            <div class="selector-grid" id="selectorGrid"></div>
-            
-            <div id="resultArea">
-                <div style="text-align: center; padding: 4rem 2rem; border: 1px dashed #333; border-radius: 20px; color: #444;">
-                    👆 Toque nas fragrâncias acima para começar
+    <main>
+        <!-- Seção Hero -->
+        <section class="min-h-screen flex items-center justify-center text-center bg-grid-white/[0.05] relative pt-20">
+            <div class="absolute pointer-events-none inset-0 flex items-center justify-center bg-gray-900 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+            <div class="container mx-auto px-6 z-10">
+                <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase">
+                    Sua Vibe, <span class="gradient-text">Suas Regras.</span>
+                </h2>
+                <p class="mt-4 text-lg md:text-2xl max-w-3xl mx-auto text-gray-300 text-center">
+                    Chega de usar o mesmo perfume de todo mundo.<br>
+                    Misture, combine e crie uma fragrância que é 100% você.<br>
+                    Com Mood Scents, você é o perfumista.
+                </p>
+                <div class="mt-8">
+                    <a href="https://www.genspark.ai/api/code_sandbox_light/preview/21ca5a5d-ce16-41d3-8c42-f9831178f884/index.html?canvas_history_id=0cc834d9-0f0a-4751-9502-6a620498b591#mixer" class="glow-button inline-block bg-gradient-to-r from-pink-500 to-violet-600 text-white font-bold text-xl py-4 px-10 rounded-full transition-transform">
+                        CRIE SEU MOOD AGORA
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="why">
-        <div class="container">
-            <h2 class="section-title">Por que <span>Nós?</span></h2>
-            <div class="why-us-grid">
-                <div class="why-card">
-                    <div class="why-icon">🌿</div>
-                    <div class="why-title">100% Vegano</div>
-                    <div class="why-desc">Fórmula limpa e consciente. Respeito total pela natureza em cada gota.</div>
+        <!-- Seção de Aromas -->
+        <section id="scents" class="py-20">
+            <div class="container mx-auto px-6 text-center">
+                <h3 class="text-4xl font-bold mb-2">Conheça as <span class="gradient-text">Bases</span></h3>
+                <p class="text-gray-400 mb-12">Cada fragrância é um mood, validado pela neurociência.<br>Use apenas uma ou combine duas ou três para criar o seu próprio efeito.</p>
+                <div id="scent-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Cards de perfumes serão inseridos aqui pelo JS -->
+                
+                        <div class="glass-card rounded-2xl p-6 text-center transform hover:-translate-y-2 flex flex-col">
+                            <div class="text-6xl mb-1 flex justify-center items-center h-28"><img src="./VAaFUCsb(1)" alt="Citrus Pop" class="inline-block h-28 w-28 object-contain scent-icon"></div>
+                            <h4 class="text-2xl font-bold">Citrus Pop</h4>
+                            <p class="text-gray-400 mt-2 h-24 flex-grow">Refrescante, leve e vibrante, perfeito para dar um toque de energia ao seu dia.</p>
+                        </div>
+                    
+                        <div class="glass-card rounded-2xl p-6 text-center transform hover:-translate-y-2 flex flex-col">
+                            <div class="text-6xl mb-1 flex justify-center items-center h-28"><img src="./HEryEB0y(1)" alt="Vanilla Haze" class="inline-block h-28 w-28 object-contain scent-icon"></div>
+                            <h4 class="text-2xl font-bold">Vanilla Haze</h4>
+                            <p class="text-gray-400 mt-2 h-24 flex-grow">Doce, gourmand e cremosa, traz conforto e uma sensualidade aconchegante.</p>
+                        </div>
+                    
+                        <div class="glass-card rounded-2xl p-6 text-center transform hover:-translate-y-2 flex flex-col">
+                            <div class="text-6xl mb-1 flex justify-center items-center h-28"><img src="./pS8zeIce(1)" alt="Shine On" class="inline-block h-28 w-28 object-contain scent-icon"></div>
+                            <h4 class="text-2xl font-bold">Shine On</h4>
+                            <p class="text-gray-400 mt-2 h-24 flex-grow">Borbulhante, frutada e festiva, para celebrar cada momento com brilho.</p>
+                        </div>
+                    
+                        <div class="glass-card rounded-2xl p-6 text-center transform hover:-translate-y-2 flex flex-col">
+                            <div class="text-6xl mb-1 flex justify-center items-center h-28"><img src="./NwV5kxxr(1)" alt="Wood Rush" class="inline-block h-28 w-28 object-contain scent-icon"></div>
+                            <h4 class="text-2xl font-bold">Wood Rush</h4>
+                            <p class="text-gray-400 mt-2 h-24 flex-grow">Seca, quente e sólida, para uma presença marcante e sofisticada.</p>
+                        </div>
+                    
+                        <div class="glass-card rounded-2xl p-6 text-center transform hover:-translate-y-2 flex flex-col">
+                            <div class="text-6xl mb-1 flex justify-center items-center h-28"><img src="./YmTLHMEY(1)" alt="Calm Vibes" class="inline-block h-28 w-28 object-contain scent-icon"></div>
+                            <h4 class="text-2xl font-bold">Calm Vibes</h4>
+                            <p class="text-gray-400 mt-2 h-24 flex-grow">Floral, relaxante e limpa, ideal para momentos de tranquilidade e foco.</p>
+                        </div>
+                    
+                        <div class="glass-card rounded-2xl p-6 text-center transform hover:-translate-y-2 flex flex-col">
+                            <div class="text-6xl mb-1 flex justify-center items-center h-28"><img src="./5vOBYMMc(1)" alt="Velvet Aura" class="inline-block h-28 w-28 object-contain scent-icon"></div>
+                            <h4 class="text-2xl font-bold">Velvet Aura</h4>
+                            <p class="text-gray-400 mt-2 h-24 flex-grow">Especiarias, quente e intensa, para um toque misterioso e opulento.</p>
+                        </div>
+                    
+                        <div class="glass-card rounded-2xl p-6 text-center transform hover:-translate-y-2 flex flex-col">
+                            <div class="text-6xl mb-1 flex justify-center items-center h-28"><img src="./eT9jaNzK(1)" alt="Patch Crew" class="inline-block h-28 w-28 object-contain scent-icon"></div>
+                            <h4 class="text-2xl font-bold">Patch Crew</h4>
+                            <p class="text-gray-400 mt-2 h-24 flex-grow">Terrosa, adocicada e envolvente, traz profundidade e um calor sutil.</p>
+                        </div>
+                    
+                        <div class="glass-card rounded-2xl p-6 text-center transform hover:-translate-y-2 flex flex-col">
+                            <div class="text-6xl mb-1 flex justify-center items-center h-28"><img src="./Gh8blmr7(1)" alt="Lótus Up" class="inline-block h-28 w-28 object-contain scent-icon"></div>
+                            <h4 class="text-2xl font-bold">Lótus Up</h4>
+                            <p class="text-gray-400 mt-2 h-24 flex-grow">Aquática, com menta e zen, leve e revigorante, para uma sensação de paz.</p>
+                        </div>
+                    
+                        <div class="glass-card rounded-2xl p-6 text-center transform hover:-translate-y-2 flex flex-col">
+                            <div class="text-6xl mb-1 flex justify-center items-center h-28"><img src="./tNm9MIFM(1)" alt="Juicy Glow" class="inline-block h-28 w-28 object-contain scent-icon"></div>
+                            <h4 class="text-2xl font-bold">Juicy Glow</h4>
+                            <p class="text-gray-400 mt-2 h-24 flex-grow">Suculenta, doce e divertida, para um toque jovem e irresistível.</p>
+                        </div>
+                    
+                        <div class="glass-card rounded-2xl p-6 text-center transform hover:-translate-y-2 flex flex-col">
+                            <div class="text-6xl mb-1 flex justify-center items-center h-28">🌸</div>
+                            <h4 class="text-2xl font-bold">Pure Bloom</h4>
+                            <p class="text-gray-400 mt-2 h-24 flex-grow">Floral e alegre, traz leveza e bom humor para iluminar o seu dia.</p>
+                        </div>
+                    </div>
+            </div>
+        </section>
+
+        <!-- Seção Moods Prontos -->
+        <section id="moods-prontos" class="py-20 bg-gray-900/50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold">Qual é o seu <span class="gradient-text">mood</span>?</h3>
+                    <p class="text-gray-400 mt-2 max-w-2xl mx-auto">Encontre o layering perfeito para o seu mood. Nossas combinações testadas (e amadas) pela neurociência.</p>
                 </div>
-                <div class="why-card">
-                    <div class="why-icon">🐰</div>
-                    <div class="why-title">Cruelty Free</div>
-                    <div class="why-desc">Amamos os animais. Nossos produtos jamais são testados neles.</div>
-                </div>
-                <div class="why-card">
-                    <div class="why-icon">🆔</div>
-                    <div class="why-title">Sua Identidade</div>
-                    <!-- VOCABULÁRIO ATUALIZADO AQUI -->
-                    <div class="why-desc">Criado para ser único, assim como você. Liberdade total para decidir seu aroma.</div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                    
+                    <!-- Card 1: Foco Total (Calm Vibes + Wood Rush) -->
+                    <div class="glass-card rounded-2xl p-8 flex flex-col transform hover:-translate-y-2">
+                        <div class="mb-4">
+                            <span class="text-sm font-bold gradient-text uppercase">Mood: Mindfulness</span>
+                            <h4 class="text-2xl font-bold text-white mt-1">Foco Total</h4>
+                        </div>
+                        <p class="text-gray-300 flex-grow">Para aquela apresentação importante. O Calm Vibes acalma a mente e o Wood Rush traz confiança.</p>
+                        <div class="mt-6">
+                            <h5 class="text-sm text-gray-400 mb-3">Sua Combinação:</h5>
+                            <div class="flex flex-wrap gap-4">
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./YmTLHMEY(1)" alt="Calm Vibes" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Calm Vibes</span></div>
+                                <span class="text-3xl font-bold self-center text-pink-400">+</span>
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./NwV5kxxr(1)" alt="Wood Rush" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Wood Rush</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Good Vibes Only (Lótus Up + Citrus Pop) -->
+                    <div class="glass-card rounded-2xl p-8 flex flex-col transform hover:-translate-y-2">
+                        <div class="mb-4">
+                            <span class="text-sm font-bold gradient-text uppercase">Mood: Alegria</span>
+                            <h4 class="text-2xl font-bold text-white mt-1">Good Vibes Only</h4>
+                        </div>
+                        <p class="text-gray-300 flex-grow">Leve e feliz. A combinação aquática do Lótus Up com o frescor do Citrus Pop te faz sorrir instantaneamente.</p>
+                        <div class="mt-6">
+                            <h5 class="text-sm text-gray-400 mb-3">Sua Combinação:</h5>
+                            <div class="flex flex-wrap gap-4">
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./Gh8blmr7(1)" alt="Lótus Up" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Lótus Up</span></div>
+                                <span class="text-3xl font-bold self-center text-pink-400">+</span>
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./VAaFUCsb(1)" alt="Citrus Pop" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Citrus Pop</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Main Character (Velvet Aura + Wood Rush) -->
+                    <div class="glass-card rounded-2xl p-8 flex flex-col transform hover:-translate-y-2">
+                        <div class="mb-4">
+                            <span class="text-sm font-bold gradient-text uppercase">Mood: Energia</span>
+                            <h4 class="text-2xl font-bold text-white mt-1">Main Character</h4>
+                        </div>
+                        <p class="text-gray-300 flex-grow">O contraste do Wood Rush com o Velvet Aura exótico. Uma vibração poderosa para ser o centro das atenções.</p>
+                        <div class="mt-6">
+                            <h5 class="text-sm text-gray-400 mb-3">Sua Combinação:</h5>
+                            <div class="flex flex-wrap gap-4">
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./NwV5kxxr(1)" alt="Wood Rush" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Wood Rush</span></div>
+                                <span class="text-3xl font-bold self-center text-pink-400">+</span>
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./5vOBYMMc(1)" alt="Velvet Aura" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Velvet Aura</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Confy & Cool (Calm Vibes + Citrus Pop) -->
+                    <div class="glass-card rounded-2xl p-8 flex flex-col transform hover:-translate-y-2">
+                        <div class="mb-4">
+                            <span class="text-sm font-bold gradient-text uppercase">Mood: Auto Estima</span>
+                            <h4 class="text-2xl font-bold text-white mt-1">Confy &amp; Cool</h4>
+                        </div>
+                        <p class="text-gray-300 flex-grow">Uma vibe de "nasci assim". O Calm Vibes limpa e o Citrus Pop traz uma confiança natural e fresca.</p>
+                        <div class="mt-6">
+                            <h5 class="text-sm text-gray-400 mb-3">Sua Combinação:</h5>
+                            <div class="flex flex-wrap gap-4">
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./YmTLHMEY(1)" alt="Calm Vibes" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Calm Vibes</span></div>
+                                <span class="text-3xl font-bold self-center text-pink-400">+</span>
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./VAaFUCsb(1)" alt="Citrus Pop" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Citrus Pop</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 5: Cheguei (Vanilla Haze + Juicy Glow) -->
+                    <div class="glass-card rounded-2xl p-8 flex flex-col transform hover:-translate-y-2">
+                        <div class="mb-4">
+                            <span class="text-sm font-bold gradient-text uppercase">Mood: Sedução &amp; Auto Estima</span>
+                            <h4 class="text-2xl font-bold text-white mt-1">Cheguei</h4>
+                        </div>
+                        <p class="text-gray-300 flex-grow">Doce e confiante. A Vanilla Haze seduz e o Juicy Glow traz uma originalidade que eleva a auto estima.</p>
+                        <div class="mt-6">
+                            <h5 class="text-sm text-gray-400 mb-3">Sua Combinação:</h5>
+                            <div class="flex flex-wrap gap-4">
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./HEryEB0y(1)" alt="Vanilla Haze" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Vanilla Haze</span></div>
+                                <span class="text-3xl font-bold self-center text-pink-400">+</span>
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./tNm9MIFM(1)" alt="Juicy Glow" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Juicy Glow</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 6: Boss Mode (Citrus Pop + Wood Rush) -->
+                    <div class="glass-card rounded-2xl p-8 flex flex-col transform hover:-translate-y-2">
+                        <div class="mb-4">
+                            <span class="text-sm font-bold gradient-text uppercase">Mood: Auto Estima</span>
+                            <h4 class="text-2xl font-bold text-white mt-1">Boss Mode</h4>
+                        </div>
+                        <p class="text-gray-300 flex-grow">Presença marcante. O brilho do Citrus Pop com a força do Wood Rush. Impossível ignorar.</p>
+                        <div class="mt-6">
+                            <h5 class="text-sm text-gray-400 mb-3">Sua Combinação:</h5>
+                            <div class="flex flex-wrap gap-4">
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./VAaFUCsb(1)" alt="Citrus Pop" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Citrus Pop</span></div>
+                                <span class="text-3xl font-bold self-center text-pink-400">+</span>
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./NwV5kxxr(1)" alt="Wood Rush" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Wood Rush</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 7: Vibe de Verão (Juicy Glow + Citrus Pop) -->
+                    <div class="glass-card rounded-2xl p-8 flex flex-col transform hover:-translate-y-2">
+                        <div class="mb-4">
+                            <span class="text-sm font-bold gradient-text uppercase">Mood: Sedução</span>
+                            <h4 class="text-2xl font-bold text-white mt-1">Vibe de Verão</h4>
+                        </div>
+                        <p class="text-gray-300 flex-grow">Divertida, suculenta e flertante. O Citrus Pop traz o frescor e o Juicy Glow a doçura da estação.</p>
+                        <div class="mt-6">
+                            <h5 class="text-sm text-gray-400 mb-3">Sua Combinação:</h5>
+                            <div class="flex flex-wrap gap-4">
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./VAaFUCsb(1)" alt="Citrus Pop" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Citrus Pop</span></div>
+                                <span class="text-3xl font-bold self-center text-pink-400">+</span>
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./tNm9MIFM(1)" alt="Juicy Glow" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Juicy Glow</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 8: Citrus Pop (Citrus Pop + Vanilla Haze) -->
+                    <div class="glass-card rounded-2xl p-8 flex flex-col transform hover:-translate-y-2">
+                        <div class="mb-4">
+                            <span class="text-sm font-bold gradient-text uppercase">Mood: Energia</span>
+                            <h4 class="text-2xl font-bold text-white mt-1">Citrus Pop</h4>
+                        </div>
+                        <p class="text-gray-300 flex-grow">Uma energia doce e vibrante que dá água na boca. O azedinho do Citrus Pop com o creme da Vanilla Haze.</p>
+                        <div class="mt-6">
+                            <h5 class="text-sm text-gray-400 mb-3">Sua Combinação:</h5>
+                            <div class="flex flex-wrap gap-4">
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./VAaFUCsb(1)" alt="Citrus Pop" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Citrus Pop</span></div>
+                                <span class="text-3xl font-bold self-center text-pink-400">+</span>
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./HEryEB0y(1)" alt="Vanilla Haze" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Vanilla Haze</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 9: VIP Access (Shine On + Velvet Aura) -->
+                    <div class="glass-card rounded-2xl p-8 flex flex-col transform hover:-translate-y-2">
+                        <div class="mb-4">
+                            <span class="text-sm font-bold gradient-text uppercase">Mood: Sedução</span>
+                            <h4 class="text-2xl font-bold text-white mt-1">VIP Access</h4>
+                        </div>
+                        <p class="text-gray-300 flex-grow">Luxo e atração. O glamour borbulhante do Shine On com a intensidade floral inebriante do Velvet Aura.</p>
+                        <div class="mt-6">
+                            <h5 class="text-sm text-gray-400 mb-3">Sua Combinação:</h5>
+                            <div class="flex flex-wrap gap-4">
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./5vOBYMMc(1)" alt="Velvet Aura" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Velvet Aura</span></div>
+                                <span class="text-3xl font-bold self-center text-pink-400">+</span>
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-3 rounded-lg"><img src="./pS8zeIce(1)" alt="Shine On" class="h-12 w-12 object-contain scent-icon"> <span class="font-bold">Shine On</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 10: Imparável (Velvet Aura + Vanilla Haze + Citrus Pop) -->
+                    <div class="glass-card rounded-2xl p-8 flex flex-col transform hover:-translate-y-2">
+                        <div class="mb-4">
+                            <span class="text-sm font-bold gradient-text uppercase">Mood: Sedução &amp; Energia</span>
+                            <h4 class="text-2xl font-bold text-white mt-1">Imparável</h4>
+                        </div>
+                        <p class="text-gray-300 flex-grow">A combinação completa. O brilho do Citrus Pop, a sedução do Velvet Aura e o calor da Vanilla Haze. Para quem quer tudo.</p>
+                        <div class="mt-6">
+                            <h5 class="text-sm text-gray-400 mb-3">Sua Combinação:</h5>
+                            <div class="flex flex-wrap gap-2">
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-2 rounded-lg"><img src="./5vOBYMMc(1)" alt="Velvet Aura" class="h-8 w-8 object-contain scent-icon"> <span class="font-bold">Velvet Aura</span></div>
+                                <span class="text-2xl font-bold self-center text-pink-400">+</span>
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-2 rounded-lg"><img src="./HEryEB0y(1)" alt="Vanilla Haze" class="h-8 w-8 object-contain scent-icon"> <span class="font-bold">Vanilla Haze</span></div>
+                                <span class="text-2xl font-bold self-center text-pink-400">+</span>
+                                <div class="flex items-center gap-2 glass-card bg-gray-800 p-2 rounded-lg"><img src="./VAaFUCsb(1)" alt="Citrus Pop" class="h-8 w-8 object-contain scent-icon"> <span class="font-bold">Citrus Pop</span></div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <div class="cta-section">
-        <div class="container">
-            <h3 class="cta-title">Não use o perfume de todo mundo.</h3>
-            <p class="cta-sub">Personalize. Desperte seu mood agora.</p>
-            <a href="#lab" class="btn-primary" style="background: #fff; color: #000;">
-                CRIE SEU MOOD 🧪
-            </a>
-        </div>
-    </div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-brand">Mood Scents - Sua Vibe - Seu Aroma</div>
-            <div class="footer-info">© 2025 Mood Scents ®</div>
-            <div class="footer-info">Empresa Gaúcha - Fabricado em Porto Alegre - RS/BR</div>
+        <!-- Seção Mixer -->
+        <section id="mixer" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold">O <span class="gradient-text">Laboratório</span> é Seu</h3>
+                    <p class="text-gray-400 mt-2">Selecione dois ou três aromas e descubra a vibe que vocês criam juntos.</p>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-8 items-start">
+                    <!-- Coluna de Seleção -->
+                    <div class="w-full lg:w-2-3">
+                        <h4 class="text-2xl font-bold mb-4">1. Escolha suas bases:</h4>
+                        <div id="mixer-scent-options" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                            <!-- Opções de aromas para o mixer -->
+                        
+                        <div class="scent-card glass-card rounded-2xl p-4 text-center cursor-pointer border-2 border-transparent" data-scent-id="citrus-pop" data-scent-name="Citrus Pop" data-scent-icon="https://www.genspark.ai/api/files/s/VAaFUCsb" data-scent-emoji="🍊">
+                           <div class="text-4xl mb-2 flex justify-center items-center h-14"><img src="./VAaFUCsb(1)" alt="Citrus Pop" class="inline-block h-14 w-14 object-contain scent-icon"></div>
+                           <h5 class="font-bold">Citrus Pop</h5>
+                        </div>
+                    
+                        <div class="scent-card glass-card rounded-2xl p-4 text-center cursor-pointer border-2 border-transparent" data-scent-id="vanilla-haze" data-scent-name="Vanilla Haze" data-scent-icon="https://www.genspark.ai/api/files/s/HEryEB0y" data-scent-emoji="🍦">
+                           <div class="text-4xl mb-2 flex justify-center items-center h-14"><img src="./HEryEB0y(1)" alt="Vanilla Haze" class="inline-block h-14 w-14 object-contain scent-icon"></div>
+                           <h5 class="font-bold">Vanilla Haze</h5>
+                        </div>
+                    
+                        <div class="scent-card glass-card rounded-2xl p-4 text-center cursor-pointer border-2 border-transparent" data-scent-id="shine-on" data-scent-name="Shine On" data-scent-icon="https://www.genspark.ai/api/files/s/pS8zeIce" data-scent-emoji="🥂">
+                           <div class="text-4xl mb-2 flex justify-center items-center h-14"><img src="./pS8zeIce(1)" alt="Shine On" class="inline-block h-14 w-14 object-contain scent-icon"></div>
+                           <h5 class="font-bold">Shine On</h5>
+                        </div>
+                    
+                        <div class="scent-card glass-card rounded-2xl p-4 text-center cursor-pointer border-2 border-transparent" data-scent-id="wood-rush" data-scent-name="Wood Rush" data-scent-icon="https://www.genspark.ai/api/files/s/NwV5kxxr" data-scent-emoji="🌲">
+                           <div class="text-4xl mb-2 flex justify-center items-center h-14"><img src="./NwV5kxxr(1)" alt="Wood Rush" class="inline-block h-14 w-14 object-contain scent-icon"></div>
+                           <h5 class="font-bold">Wood Rush</h5>
+                        </div>
+                    
+                        <div class="scent-card glass-card rounded-2xl p-4 text-center cursor-pointer border-2 border-transparent" data-scent-id="calm-vibes" data-scent-name="Calm Vibes" data-scent-icon="https://www.genspark.ai/api/files/s/YmTLHMEY" data-scent-emoji="💜">
+                           <div class="text-4xl mb-2 flex justify-center items-center h-14"><img src="./YmTLHMEY(1)" alt="Calm Vibes" class="inline-block h-14 w-14 object-contain scent-icon"></div>
+                           <h5 class="font-bold">Calm Vibes</h5>
+                        </div>
+                    
+                        <div class="scent-card glass-card rounded-2xl p-4 text-center cursor-pointer border-2 border-transparent" data-scent-id="velvet-aura" data-scent-name="Velvet Aura" data-scent-icon="https://www.genspark.ai/api/files/s/5vOBYMMc" data-scent-emoji="✨">
+                           <div class="text-4xl mb-2 flex justify-center items-center h-14"><img src="./5vOBYMMc(1)" alt="Velvet Aura" class="inline-block h-14 w-14 object-contain scent-icon"></div>
+                           <h5 class="font-bold">Velvet Aura</h5>
+                        </div>
+                    
+                        <div class="scent-card glass-card rounded-2xl p-4 text-center cursor-pointer border-2 border-transparent" data-scent-id="patch-crew" data-scent-name="Patch Crew" data-scent-icon="https://www.genspark.ai/api/files/s/eT9jaNzK" data-scent-emoji="🍂">
+                           <div class="text-4xl mb-2 flex justify-center items-center h-14"><img src="./eT9jaNzK(1)" alt="Patch Crew" class="inline-block h-14 w-14 object-contain scent-icon"></div>
+                           <h5 class="font-bold">Patch Crew</h5>
+                        </div>
+                    
+                        <div class="scent-card glass-card rounded-2xl p-4 text-center cursor-pointer border-2 border-transparent" data-scent-id="lotus-up" data-scent-name="Lótus Up" data-scent-icon="https://www.genspark.ai/api/files/s/Gh8blmr7" data-scent-emoji="🪷">
+                           <div class="text-4xl mb-2 flex justify-center items-center h-14"><img src="./Gh8blmr7(1)" alt="Lótus Up" class="inline-block h-14 w-14 object-contain scent-icon"></div>
+                           <h5 class="font-bold">Lótus Up</h5>
+                        </div>
+                    
+                        <div class="scent-card glass-card rounded-2xl p-4 text-center cursor-pointer border-2 border-transparent" data-scent-id="juicy-glow" data-scent-name="Juicy Glow" data-scent-icon="https://www.genspark.ai/api/files/s/tNm9MIFM" data-scent-emoji="🍓">
+                           <div class="text-4xl mb-2 flex justify-center items-center h-14"><img src="./tNm9MIFM(1)" alt="Juicy Glow" class="inline-block h-14 w-14 object-contain scent-icon"></div>
+                           <h5 class="font-bold">Juicy Glow</h5>
+                        </div>
+                    
+                        <div class="scent-card glass-card rounded-2xl p-4 text-center cursor-pointer border-2 border-transparent" data-scent-id="pure-bloom" data-scent-name="Pure Bloom" data-scent-icon="" data-scent-emoji="🌸">
+                           <div class="text-4xl mb-2 flex justify-center items-center h-14">🌸</div>
+                           <h5 class="font-bold">Pure Bloom</h5>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- Coluna de Resultado -->
+                    <div class="w-full lg:w-1/3 sticky top-24">
+                        <h4 class="text-2xl font-bold mb-4">2. Seu Mood:</h4>
+                        <div id="mixer-result" class="glass-card rounded-2xl p-8 min-h-[200px] flex flex-col justify-center items-center text-center">
+                            <p id="mixer-placeholder" class="text-gray-400">Selecione 2 ou 3 aromas para ver a mágica acontecer...</p>
+                            <div id="mixer-output" class="hidden">
+                                <h5 id="result-title" class="text-2xl font-bold gradient-text mb-2"></h5>
+                                <p id="result-description" class="text-gray-200"></p>
+                                <div id="selected-scents-display" class="mt-4 flex flex-wrap gap-2 justify-center"></div>
+                            </div>
+                        </div>
+                        <button id="reset-mixer" class="mt-4 w-full bg-gray-700 text-white font-bold py-2 px-4 rounded-full hover:bg-gray-600 transition-colors hidden">Limpar Combinação</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Por que Nós? -->
+        <section id="why" class="py-20 bg-gray-900/50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold">Feito para você, <span class="gradient-text">pensando no mundo.</span></h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 max-w-6xl mx-auto">
+                    <div class="text-center">
+                        <div class="text-5xl mb-3 gradient-text">✧</div>
+                        <h4 class="text-2xl font-bold mb-2">100% Vegan</h4>
+                        <p class="text-gray-400">Nenhum ingrediente de origem animal. Nunca.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl mb-3 gradient-text">♡</div>
+                        <h4 class="text-2xl font-bold mb-2">Cruelty-Free</h4>
+                        <p class="text-gray-400">Amamos os animais. Nossos produtos não são testados neles.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl mb-3 gradient-text">⟡</div>
+                        <h4 class="text-2xl font-bold mb-2">Sua Identidade</h4>
+                        <p class="text-gray-400">Criado para ser único, assim como você. Liberdade para se expressar.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl mb-3 gradient-text">🇧🇷</div>
+                        <h4 class="text-2xl font-bold mb-2">Fabricação Gaúcha</h4>
+                        <p class="text-gray-400">Produzido com orgulho em Porto Alegre no Rio Grande do Sul, Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-8">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>© 2024 Mood Scents. Todos os direitos reservados.</p>
+            <p class="mt-2">Uninova Laboratório Industrial LTDA</p>
         </div>
     </footer>
 
+
     <script>
-        // DADOS TÉCNICOS & ÍCONES GEN Z (Atualizado V5.2)
-        const fragrances = [
-            { id: "citrus", name: "Citrus Pop", effect: "Energia", icon: "🍊", color: "#CCFF00", desc: "Explosão solar." },
-            { id: "vanilla", name: "Vanilla Haze", effect: "Sedução", icon: "🍦", color: "#FF00FF", desc: "Baunilha viciante." },
-            { id: "shine", name: "Shine On", effect: "Sedução", icon: "🥂", color: "#FF00FF", desc: "Confiança pura." },
-            { id: "wood", name: "Wood Rush", effect: "Autoestima", icon: "🌲", color: "#0044FF", desc: "Postura de comando." },
-            { id: "calm", name: "Calm Vibes", effect: "Relax", icon: "💜", color: "#9D00FF", desc: "Desliga o stress." },
-            { id: "velvet", name: "Velvet Aura", effect: "Sedução", icon: "✨", color: "#FF00FF", desc: "Mistério profundo." },
-            { id: "patch", name: "Patch Crew", effect: "Mindfulness", icon: "🍂", color: "#FFaa00", desc: "Foco e presença." },
-            { id: "lotus", name: "Lótus Up", effect: "Energia", icon: "🪷", color: "#CCFF00", desc: "Clareza mental." },
-            { id: "juicy", name: "Juicy Glow", effect: "Autoestima", icon: "🍓", color: "#0044FF", desc: "Glow radiante." },
-            { id: "bloom", name: "Pure Bloom", effect: "Alegria", icon: "🌸", color: "#FFaa00", desc: "Ativa o sorriso." }
-        ];
-
-        // COMBOS SECRETOS & JACKPOTS (Atualizado V5.2 com 3-Items)
-        const matches = [
-            // Duplas
-            { ids: ["lotus", "citrus"], mood: "Energia", title: "Good Vibes Only", desc: "Leve e feliz. A combinação aquática do Lótus Up com o frescor do Citrus Pop te faz sorrir instantaneamente." },
-            { ids: ["calm", "wood"], mood: "Mindfulness", title: "Foco Total", desc: "Para momentos de tranquilidade. O Calm Vibes acalma a mente e o Wood Rush traz solidez." },
-            { ids: ["bloom", "calm"], mood: "Serenidade", title: "Zen Garden", desc: "A pureza do Pure Bloom com a calma do Calm Vibes. Um jardim de tranquilidade." },
-            { ids: ["patch", "citrus"], mood: "Equilíbrio", title: "Vibe Terrosa", desc: "O contraste perfeito entre terra e céu. A profundidade do Patch Crew encontra a leveza do Citrus Pop." },
-            { ids: ["lotus", "wood"], mood: "Conexão", title: "Nature Mode", desc: "Floresta e água em harmonia. O frescor aquático do Lótus Up com a força amadeirada do Wood Rush." },
-            { ids: ["patch", "bloom"], mood: "Mistério", title: "Jardim Secreto", desc: "Flores escondidas na terra. O jasmin delicado do Pure Bloom dança com a profundidade terrosa do Patch Crew." },
-            { ids: ["juicy", "vanilla"], mood: "Sedução", title: "Doce Tentação", desc: "Pura gostosura. O frutado suculento do Juicy Glow mergulha no creme da Vanilla Haze. Irresistível." },
-            { ids: ["shine", "juicy"], mood: "Celebração", title: "Festa Chic", desc: "Champagne e frutas vermelhas. O brilho festivo do Shine On com a doçura vibrante do Juicy Glow." },
-            { ids: ["citrus", "wood"], mood: "Poder", title: "Boss Mode", desc: "Presença marcante. O brilho do Citrus Pop com a força do Wood Rush. Impossível ignorar." },
-            { ids: ["shine", "velvet"], mood: "Luxo", title: "VIP Access", desc: "Luxo e atração. O glamour borbulhante do Shine On com a intensidade opulenta do Velvet Aura." },
-            { ids: ["wood", "velvet"], mood: "Confiança", title: "Main Character", desc: "O contraste do Wood Rush com o Velvet Aura exótico. Uma vibração poderosa para ser o centro das atenções." },
-            { ids: ["patch", "calm"], mood: "Mindfulness", title: "Alma Calma", desc: "A combinação perfeita para meditar. O Patch Crew centra a mente e o Calm Vibes alivia a tensão." },
-            { ids: ["wood", "patch"], mood: "Confiança", title: "Terra Firme", desc: "A solidez do Wood Rush com a profundidade terrosa do Patch Crew. Para dias que pedem pés no chão." },
-            { ids: ["citrus", "vanilla"], mood: "Aconchego", title: "Citrus Drip", desc: "Uma energia doce e vibrante. O azedinho vibrante do Citrus Pop com o creme da Vanilla Haze." },
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- DADOS DOS PERFUMES (ATUALIZADOS CONFORME PDF) ---
+            const scents = [
+                { id: 'citrus-pop', name: 'Citrus Pop', emoji: '🍊', icon: 'https://www.genspark.ai/api/files/s/VAaFUCsb', description: 'Refrescante, leve e vibrante, perfeito para dar um toque de energia ao seu dia.' },
+                { id: 'vanilla-haze', name: 'Vanilla Haze', emoji: '🍦', icon: 'https://www.genspark.ai/api/files/s/HEryEB0y', description: 'Doce, gourmand e cremosa, traz conforto e uma sensualidade aconchegante.' },
+                { id: 'shine-on', name: 'Shine On', emoji: '🥂', icon: 'https://www.genspark.ai/api/files/s/pS8zeIce', description: 'Borbulhante, frutada e festiva, para celebrar cada momento com brilho.' },
+                { id: 'wood-rush', name: 'Wood Rush', emoji: '🌲', icon: 'https://www.genspark.ai/api/files/s/NwV5kxxr', description: 'Seca, quente e sólida, para uma presença marcante e sofisticada.' },
+                { id: 'calm-vibes', name: 'Calm Vibes', emoji: '💜', icon: 'https://www.genspark.ai/api/files/s/YmTLHMEY', description: 'Floral, relaxante e limpa, ideal para momentos de tranquilidade e foco.' },
+                { id: 'velvet-aura', name: 'Velvet Aura', emoji: '✨', icon: 'https://www.genspark.ai/api/files/s/5vOBYMMc', description: 'Especiarias, quente e intensa, para um toque misterioso e opulento.' },
+                { id: 'patch-crew', name: 'Patch Crew', emoji: '🍂', icon: 'https://www.genspark.ai/api/files/s/eT9jaNzK', description: 'Terrosa, adocicada e envolvente, traz profundidade e um calor sutil.' },
+                { id: 'lotus-up', name: 'Lótus Up', emoji: '🪷', icon: 'https://www.genspark.ai/api/files/s/Gh8blmr7', description: 'Aquática, com menta e zen, leve e revigorante, para uma sensação de paz.' },
+                { id: 'juicy-glow', name: 'Juicy Glow', emoji: '🍓', icon: 'https://www.genspark.ai/api/files/s/tNm9MIFM', description: 'Suculenta, doce e divertida, para um toque jovem e irresistível.' },
+                { id: 'pure-bloom', name: 'Pure Bloom', emoji: '🌸', icon: null, description: 'Floral e alegre, traz leveza e bom humor para iluminar o seu dia.' }
+            ];
             
-            // Trios (Jackpot)
-            { ids: ["velvet", "wood", "shine"], mood: "Poder", title: "Luxo Total", desc: "A tríade do luxo. Especiarias exóticas, madeira nobre e champagne. Para quem não passa despercebido." },
-            { ids: ["velvet", "juicy", "vanilla"], mood: "Sensualidade", title: "Sedução Suprema", desc: "A combinação mais irresistível. Especiarias quentes, frutas doces e creme de baunilha. Pura atração." }
-        ];
-
-        let selected = [];
-
-        function init() {
-            // Render Collection
-            document.getElementById('aromasGrid').innerHTML = fragrances.map(f => `
-                <div class="card">
-                    <div class="sticker" style="background:${f.color}; box-shadow:0 0 10px ${f.color}80;">${f.effect}</div>
-                    <div class="card-icon">${f.icon}</div>
-                    <h3>${f.name}</h3>
-                    <p>${f.desc}</p>
-                </div>
-            `).join('');
-
-            // Render Suggested Vibes (Recipes)
-            document.getElementById('recipesGrid').innerHTML = matches.map(m => {
-                // Suporte para 2 ou 3 ícones
-                const icons = m.ids.map(id => fragrances.find(f => f.id === id).icon).join('');
-                return `
-                <div class="recipe-card" onclick="applyPreset([${m.ids.map(id => `'${id}'`).join(',')}])">
-                    <div class="recipe-icon">${icons}</div>
-                    <div class="recipe-info">
-                        <h4>${m.mood}</h4>
-                        <h3>${m.title}</h3>
-                        <p>Ver Receita</p>
-                    </div>
-                </div>`;
-            }).join('');
-
-            renderSelector();
-        }
-
-        function renderSelector() {
-            document.getElementById('selectorGrid').innerHTML = fragrances.map(f => `
-                <div class="selector-btn ${selected.includes(f.id) ? 'selected' : ''}" 
-                     onclick="toggle('${f.id}')"
-                     style="${selected.length >= 3 && !selected.includes(f.id) ? 'opacity:0.3; pointer-events:none;' : ''}">
-                    <span class="emoji">${f.icon}</span>
-                    <span class="name">${f.name}</span>
-                </div>
-            `).join('');
-        }
-
-        function toggle(id) {
-            if (selected.includes(id)) selected = selected.filter(i => i !== id);
-            else if (selected.length < 3) selected.push(id);
-            renderSelector();
-            checkResult();
-        }
-
-        function applyPreset(ids) {
-            selected = ids;
-            document.getElementById('lab').scrollIntoView({behavior: 'smooth'});
-            renderSelector();
-            checkResult();
-        }
-
-        function checkResult() {
-            const area = document.getElementById('resultArea');
-            if (selected.length === 0) {
-                area.innerHTML = '<div style="text-align:center; padding:3rem; border:1px dashed #333; border-radius:20px; color:#555;">👆 Inicie a alquimia</div>';
-                return;
+            // Função para gerar o HTML do ícone
+            function getIconHTML(scent, size = 'large') {
+                const sizes = {
+                    large: 'h-28 w-28',
+                    medium: 'h-14 w-14', 
+                    small: 'h-10 w-10'
+                };
+                if (scent.icon) {
+                    return `<img src="${scent.icon}" alt="${scent.name}" class="inline-block ${sizes[size]} object-contain scent-icon">`;
+                }
+                return scent.emoji;
             }
 
-            // Verifica Match Exato (Independente da ordem)
-            const match = matches.find(c => {
-                if (c.ids.length !== selected.length) return false;
-                const sortedC = [...c.ids].sort();
-                const sortedS = [...selected].sort();
-                return sortedC.every((val, index) => val === sortedS[index]);
+            const combinations = {
+                // Combinações de 2 aromas (conforme PDF)
+                'calm-vibes-wood-rush': { title: 'Mood: Mindfulness', description: 'Foco e serenidade. O Calm Vibes acalma a mente enquanto o Wood Rush traz solidez.' },
+                'wood-rush-calm-vibes': { title: 'Mood: Mindfulness', description: 'Foco e serenidade. O Calm Vibes acalma a mente enquanto o Wood Rush traz solidez.' },
+
+                'citrus-pop-lotus-up': { title: 'Mood: Alegria', description: 'Leve e feliz. Uma combinação aquática e cítrica que te faz sorrir instantaneamente.' },
+                'lotus-up-citrus-pop': { title: 'Mood: Alegria', description: 'Leve e feliz. Uma combinação aquática e cítrica que te faz sorrir instantaneamente.' },
+
+                'wood-rush-velvet-aura': { title: 'Mood: Energia', description: 'O contraste do Wood Rush com o Velvet Aura exótico. Poderoso e vibrante, pura energia.' },
+                'velvet-aura-wood-rush': { title: 'Mood: Energia', description: 'O contraste do Wood Rush com o Velvet Aura exótico. Poderoso e vibrante, pura energia.' },
+
+                'calm-vibes-citrus-pop': { title: 'Mood: Auto Estima', description: 'Confiança limpa. Uma vibe de "nasci assim", fresca, natural e muito confiante.' },
+                'citrus-pop-calm-vibes': { title: 'Mood: Auto Estima', description: 'Confiança limpa. Uma vibe de "nasci assim", fresca, natural e muito confiante.' },
+                
+                'juicy-glow-vanilla-haze': { title: 'Mood: Sedução & Auto Estima', description: 'Doce e confiante. A Vanilla Haze seduz e o Juicy Glow traz uma originalidade que eleva a auto estima.' },
+                'vanilla-haze-juicy-glow': { title: 'Mood: Sedução & Auto Estima', description: 'Doce e confiante. A Vanilla Haze seduz e o Juicy Glow traz uma originalidade que eleva a auto estima.' },
+
+                'citrus-pop-wood-rush': { title: 'Mood: Auto Estima', description: 'Presença marcante. O brilho do Citrus Pop com a força do Wood Rush. Impossível ignorar.' },
+                'wood-rush-citrus-pop': { title: 'Mood: Auto Estima', description: 'Presença marcante. O brilho do Citrus Pop com a força do Wood Rush. Impossível ignorar.' },
+
+                'citrus-pop-juicy-glow': { title: 'Mood: Sedução', description: 'Divertida e atraente. Uma mistura jovem, suculenta e flertante.' },
+                'juicy-glow-citrus-pop': { title: 'Mood: Sedução', description: 'Divertida e atraente. Uma mistura jovem, suculenta e flertante.' },
+
+                'citrus-pop-vanilla-haze': { title: 'Mood: Energia', description: 'Torta de limão. Uma energia doce, gourmand e vibrante que dá água na boca.' },
+                'vanilla-haze-citrus-pop': { title: 'Mood: Energia', description: 'Torta de limão. Uma energia doce, gourmand e vibrante que dá água na boca.' },
+
+                'shine-on-velvet-aura': { title: 'Mood: Sedução', description: 'Luxo e atração. O glamour borbulhante do Shine On com a intensidade floral inebriante do Velvet Aura.' },
+                'velvet-aura-shine-on': { title: 'Mood: Sedução', description: 'Luxo e atração. O glamour borbulhante do Shine On com a intensidade floral inebriante do Velvet Aura.' },
+
+                // Combinação de 3 aromas (conforme PDF)
+                'citrus-pop-vanilla-haze-velvet-aura': { title: 'Mood: Sedução & Energia', description: 'A combinação completa. O brilho do Citrus Pop, a sedução do Velvet Aura e o calor da Vanilla Haze. Para quem quer tudo.' },
+                'citrus-pop-velvet-aura-vanilla-haze': { title: 'Mood: Sedução & Energia', description: 'A combinação completa. O brilho do Citrus Pop, a sedução do Velvet Aura e o calor da Vanilla Haze. Para quem quer tudo.' },
+                'vanilla-haze-citrus-pop-velvet-aura': { title: 'Mood: Sedução & Energia', description: 'A combinação completa. O brilho do Citrus Pop, a sedução do Velvet Aura e o calor da Vanilla Haze. Para quem quer tudo.' },
+                'vanilla-haze-velvet-aura-citrus-pop': { title: 'Mood: Sedução & Energia', description: 'A combinação completa. O brilho do Citrus Pop, a sedução do Velvet Aura e o calor da Vanilla Haze. Para quem quer tudo.' },
+                'velvet-aura-citrus-pop-vanilla-haze': { title: 'Mood: Sedução & Energia', description: 'A combinação completa. O brilho do Citrus Pop, a sedução do Velvet Aura e o calor da Vanilla Haze. Para quem quer tudo.' },
+                'velvet-aura-vanilla-haze-citrus-pop': { title: 'Mood: Sedução & Energia', description: 'A combinação completa. O brilho do Citrus Pop, a sedução do Velvet Aura e o calor da Vanilla Haze. Para quem quer tudo.' }
+            };
+
+            // Efeitos neurocientíficos de cada fragrância (conforme categorias oficiais)
+            const scentEffects = {
+                'citrus-pop': { 
+                    moods: ['energia', 'vitalidade'], 
+                    effects: ['aumenta a disposição', 'eleva o ânimo', 'traz vitalidade'],
+                    vibe: 'energizante e refrescante'
+                },
+                'lotus-up': { 
+                    moods: ['energia', 'frescor'], 
+                    effects: ['revigora a mente', 'traz clareza', 'aumenta o foco'],
+                    vibe: 'aquática e energizante'
+                },
+                'vanilla-haze': { 
+                    moods: ['sedução', 'sensualidade'], 
+                    effects: ['aquece os sentidos', 'desperta sensualidade', 'cria intimidade'],
+                    vibe: 'acolhedora e sedutora'
+                },
+                'shine-on': { 
+                    moods: ['sedução', 'glamour'], 
+                    effects: ['traz brilho', 'desperta atração', 'eleva a sensualidade'],
+                    vibe: 'festiva e sedutora'
+                },
+                'velvet-aura': { 
+                    moods: ['sedução', 'mistério'], 
+                    effects: ['intensifica a presença', 'cria magnetismo', 'desperta desejo'],
+                    vibe: 'intensa e envolvente'
+                },
+                'wood-rush': { 
+                    moods: ['autoestima', 'confiança'], 
+                    effects: ['fortalece a presença', 'traz solidez', 'inspira confiança'],
+                    vibe: 'marcante e sofisticada'
+                },
+                'juicy-glow': { 
+                    moods: ['autoestima', 'jovialidade'], 
+                    effects: ['eleva a autoestima', 'traz autenticidade', 'desperta confiança'],
+                    vibe: 'suculenta e confiante'
+                },
+                'calm-vibes': { 
+                    moods: ['relaxamento', 'tranquilidade'], 
+                    effects: ['acalma a mente', 'reduz o estresse', 'traz paz interior'],
+                    vibe: 'serena e relaxante'
+                },
+                'pure-bloom': { 
+                    moods: ['relaxamento', 'leveza'], 
+                    effects: ['alivia tensões', 'traz serenidade', 'promove bem-estar'],
+                    vibe: 'floral e tranquila'
+                },
+                'patch-crew': { 
+                    moods: ['mindfulness', 'consciência'], 
+                    effects: ['conecta com o presente', 'traz consciência plena', 'promove introspecção'],
+                    vibe: 'terrosa e contemplativa'
+                }
+            };
+
+            // Função para gerar combinação personalizada
+            function generateCustomCombination(scents) {
+                const allMoods = new Set();
+                const allEffects = [];
+                const vibes = [];
+                
+                scents.forEach(scent => {
+                    const effect = scentEffects[scent.id];
+                    if (effect) {
+                        effect.moods.forEach(m => allMoods.add(m));
+                        allEffects.push(effect.effects[Math.floor(Math.random() * effect.effects.length)]);
+                        vibes.push(effect.vibe);
+                    }
+                });
+
+                const moodArray = Array.from(allMoods);
+                let title = 'Combinação Exclusiva!';
+                let description = '';
+
+                // Determina o mood principal baseado nas categorias oficiais
+                if (moodArray.includes('sedução') && moodArray.includes('energia')) {
+                    title = 'Mood: Sedução & Energia';
+                    description = `Uma combinação magnética! ${allEffects[0]} enquanto ${allEffects[1]}. Perfeita para quem quer conquistar e brilhar.`;
+                } else if (moodArray.includes('sedução') && moodArray.includes('autoestima')) {
+                    title = 'Mood: Sedução & Auto Estima';
+                    description = `Irresistível e confiante! ${allEffects[0]} e ${allEffects[1]}. Você vai se sentir poderoso(a) e magnético(a).`;
+                } else if (moodArray.includes('sedução') && moodArray.includes('relaxamento')) {
+                    title = 'Mood: Sedução & Relaxamento';
+                    description = `Sensualidade serena! ${allEffects[0]} e ${allEffects[1]}. Uma combinação para momentos íntimos e tranquilos.`;
+                } else if (moodArray.includes('sedução') && moodArray.includes('mindfulness')) {
+                    title = 'Mood: Sedução Consciente';
+                    description = `Presença magnética! ${allEffects[0]} e ${allEffects[1]}. Atração com consciência plena.`;
+                } else if (moodArray.includes('energia') && moodArray.includes('autoestima')) {
+                    title = 'Mood: Energia & Auto Estima';
+                    description = `Vitalidade confiante! ${allEffects[0]} e ${allEffects[1]}. Pronto(a) para conquistar o dia.`;
+                } else if (moodArray.includes('energia') && moodArray.includes('relaxamento')) {
+                    title = 'Mood: Equilíbrio Vital';
+                    description = `Energia equilibrada! ${allEffects[0]} e ${allEffects[1]}. Disposição com serenidade.`;
+                } else if (moodArray.includes('energia') && moodArray.includes('mindfulness')) {
+                    title = 'Mood: Foco Energizado';
+                    description = `Clareza com vitalidade! ${allEffects[0]} enquanto ${allEffects[1]}. Ideal para produtividade consciente.`;
+                } else if (moodArray.includes('autoestima') && moodArray.includes('relaxamento')) {
+                    title = 'Mood: Confiança Serena';
+                    description = `Autoconfiança tranquila! ${allEffects[0]} e ${allEffects[1]}. Segurança interior com paz.`;
+                } else if (moodArray.includes('autoestima') && moodArray.includes('mindfulness')) {
+                    title = 'Mood: Auto Estima & Mindfulness';
+                    description = `Presença autêntica! ${allEffects[0]} e ${allEffects[1]}. Confiança com consciência plena.`;
+                } else if (moodArray.includes('relaxamento') && moodArray.includes('mindfulness')) {
+                    title = 'Mood: Paz Interior';
+                    description = `Tranquilidade profunda! ${allEffects[0]} e ${allEffects[1]}. Relaxamento com consciência plena.`;
+                } else {
+                    // Combinação genérica mas ainda personalizada
+                    const moodText = moodArray.slice(0, 2).map(m => m.charAt(0).toUpperCase() + m.slice(1)).join(' & ');
+                    title = `Mood: ${moodText}`;
+                    description = `Descoberta única! Esta combinação ${allEffects[0]} e ${allEffects[1]}. Uma experiência olfativa criada por você.`;
+                }
+
+                return { title, description };
+            }
+
+            const scentListContainer = document.getElementById('scent-list');
+            const mixerOptionsContainer = document.getElementById('mixer-scent-options');
+            
+            // --- RENDERIZAR CARDS DE AROMAS ---
+            function renderScentCards() {
+                scents.forEach(scent => {
+                    const iconLarge = getIconHTML(scent, 'large');
+                    const iconMedium = getIconHTML(scent, 'medium');
+                    
+                    // Card para a seção principal
+                    const cardHTML = `
+                        <div class="glass-card rounded-2xl p-6 text-center transform hover:-translate-y-2 flex flex-col">
+                            <div class="text-6xl mb-1 flex justify-center items-center h-28">${iconLarge}</div>
+                            <h4 class="text-2xl font-bold">${scent.name}</h4>
+                            <p class="text-gray-400 mt-2 h-24 flex-grow">${scent.description}</p>
+                        </div>
+                    `;
+                    scentListContainer.innerHTML += cardHTML;
+
+                    // Card para o mixer - armazena icon URL separadamente
+                    const mixerCardHTML = `
+                        <div class="scent-card glass-card rounded-2xl p-4 text-center cursor-pointer border-2 border-transparent" data-scent-id="${scent.id}" data-scent-name="${scent.name}" data-scent-icon="${scent.icon || ''}" data-scent-emoji="${scent.emoji}">
+                           <div class="text-4xl mb-2 flex justify-center items-center h-14">${iconMedium}</div>
+                           <h5 class="font-bold">${scent.name}</h5>
+                        </div>
+                    `;
+                    mixerOptionsContainer.innerHTML += mixerCardHTML;
+                });
+            }
+
+            renderScentCards();
+
+            // --- LÓGICA DO MIXER ---
+            const mixerCards = document.querySelectorAll('#mixer-scent-options .scent-card');
+            const mixerPlaceholder = document.getElementById('mixer-placeholder');
+            const mixerOutput = document.getElementById('mixer-output');
+            const resultTitle = document.getElementById('result-title');
+            const resultDescription = document.getElementById('result-description');
+            const selectedScentsDisplay = document.getElementById('selected-scents-display');
+            const resetMixerBtn = document.getElementById('reset-mixer');
+
+            let selectedScents = [];
+
+            mixerCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const scentId = card.dataset.scentId;
+
+                    if (selectedScents.some(s => s.id === scentId)) {
+                        // Desselecionar
+                        selectedScents = selectedScents.filter(s => s.id !== scentId);
+                        card.classList.remove('selected');
+                    } else {
+                        // Selecionar
+                        if (selectedScents.length < 3) {
+                            selectedScents.push({
+                                id: scentId,
+                                name: card.dataset.scentName,
+                                icon: card.dataset.scentIcon || null,
+                                emoji: card.dataset.scentEmoji
+                            });
+                            card.classList.add('selected');
+                        }
+                    }
+
+                    updateMixerResult();
+                });
+            });
+            
+            // Função para gerar ícone no resultado do mixer
+            function getMixerIconHTML(scent) {
+                if (scent.icon) {
+                    return `<img src="${scent.icon}" alt="${scent.name}" class="inline-block h-10 w-10 object-contain scent-icon">`;
+                }
+                return `<span class="text-2xl">${scent.emoji}</span>`;
+            }
+            
+            function updateMixerResult() {
+                if (selectedScents.length >= 2) {
+                    mixerPlaceholder.classList.add('hidden');
+                    mixerOutput.classList.remove('hidden');
+                    resetMixerBtn.classList.remove('hidden');
+                    
+                    const ids = selectedScents.map(s => s.id).sort().join('-');
+                    const result = combinations[ids];
+
+                    if (result) {
+                        resultTitle.textContent = result.title;
+                        resultDescription.textContent = result.description;
+                    } else {
+                        // Gera frase personalizada baseada nos efeitos neurocientíficos
+                        const customResult = generateCustomCombination(selectedScents);
+                        resultTitle.textContent = customResult.title;
+                        resultDescription.textContent = customResult.description;
+                    }
+                    
+                    // Renderiza os ícones selecionados
+                    let displayHTML = '';
+                    selectedScents.forEach((scent, index) => {
+                        displayHTML += `
+                            <div class="flex items-center gap-2 glass-card p-2 rounded-lg">
+                                ${getMixerIconHTML(scent)}
+                                <span class="font-bold">${scent.name}</span>
+                            </div>
+                        `;
+                        if (index < selectedScents.length - 1) {
+                            displayHTML += `<span class="text-2xl font-bold self-center text-pink-400">+</span>`;
+                        }
+                    });
+                    selectedScentsDisplay.innerHTML = displayHTML;
+
+                } else {
+                    mixerPlaceholder.classList.remove('hidden');
+                    mixerOutput.classList.add('hidden');
+                    resetMixerBtn.classList.add('hidden');
+                }
+            }
+            
+            resetMixerBtn.addEventListener('click', () => {
+                selectedScents = [];
+                mixerCards.forEach(card => card.classList.remove('selected'));
+                updateMixerResult();
             });
 
-            const items = selected.map(id => fragrances.find(f => f.id === id));
-            const icons = items.map(i => i.icon).join(' + ');
-            const names = items.map(i => i.name).join(' + ');
-
-            let html = '';
-            let boxClass = 'result-box';
-
-            if (match) {
-                boxClass += ' boom';
-                html = `
-                    <h2 style="color:${getColor(match.mood)}; margin-bottom:0.5rem; letter-spacing:-1px;">BOOM! MATCH! 💥</h2>
-                    <div style="background:${getColor(match.mood)}; color:#000; display:inline-block; padding:5px 15px; border-radius:20px; font-weight:900; font-size:0.7rem; text-transform:uppercase;">
-                        MOOD DESBLOQUEADO: ${match.mood}
-                    </div>
-                    <h3 style="color:#fff; margin:1rem 0; font-size:1.4rem;">${match.title}</h3>
-                    <div style="font-size:2.5rem; margin-bottom:1rem;">${icons}</div>
-                    <p style="color:#bbb; font-size:0.95rem; line-height:1.5;">${match.desc}</p>
-                `;
-            } else {
-                const effects = items.map(i => i.effect);
-                const uniqueDesc = effects.length > 1 
-                    ? `Fusão das energias de <strong>${effects.join(' + ')}</strong>.` 
-                    : `Foco total em <strong>${effects[0]}</strong>.`;
-
-                html = `
-                    <h3 style="color:#fff; margin-bottom:1rem;">Alquimia Única</h3>
-                    <div style="font-size:2.5rem; margin-bottom:1rem;">${icons}</div>
-                    <p style="color:#ccc; margin-bottom:1rem;">${uniqueDesc}<br>Uma assinatura só sua.</p>
-                    <p style="font-size:0.7rem; color:#666; text-transform:uppercase;">MIX: ${names}</p>
-                `;
-            }
-
-            html += `
-                <br><button class="btn-primary" onclick="checkout('${match ? match.title : 'Mix Único'}')">GARANTIR MEU KIT 🛍️</button>
-                <div style="margin-top:15px; text-decoration:underline; font-size:0.8rem; color:#555; cursor:pointer;" onclick="reset()">Limpar Lab</div>
-            `;
-
-            area.innerHTML = `<div class="${boxClass}">${html}</div>`;
-        }
-
-        function getColor(mood) {
-            if(mood === 'Energia' || mood === 'Alegria') return '#CCFF00';
-            if(mood === 'Sedução' || mood === 'Sensualidade' || mood === 'Celebração') return '#FF00FF';
-            if(mood === 'Relaxamento' || mood === 'Serenidade' || mood === 'Mindfulness' || mood === 'Aconchego') return '#9D00FF';
-            if(mood === 'Autoestima' || mood === 'Confiança' || mood === 'Poder' || mood === 'Luxo') return '#0044FF';
-            return '#FFaa00';
-        }
-
-        function reset() { selected = []; renderSelector(); checkResult(); }
-
-        function checkout(mixName) {
-            const items = selected.map(id => fragrances.find(f => f.id === id).name).join(' + ');
-            const text = `Olá MoodScents! ⚡\n\nDescobri um mix no Lab:\n💀 *Vibe:* ${mixName}\n🧪 *Combo:* ${items}\n\nQuero encomendar!`;
-            window.open(`https://wa.me/5551999999999?text=${encodeURIComponent(text)}`);
-        }
-
-        init();
+        });
     </script>
-</body>
-</html>
+
+<script defer="" src="./vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;9a628dafdeada10e&quot;,&quot;serverTiming&quot;:{&quot;name&quot;:{&quot;cfExtPri&quot;:true,&quot;cfEdge&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfL4&quot;:true,&quot;cfSpeedBrain&quot;:true,&quot;cfCacheStatus&quot;:true}},&quot;version&quot;:&quot;2025.9.1&quot;,&quot;token&quot;:&quot;4edd5f8ec12a48cfa682ab8261b80a79&quot;}" crossorigin="anonymous"></script>
+
+
+</body></html>
