@@ -70,7 +70,7 @@
             </div>
             <nav class="space-x-6 hidden md:flex">
                 <a href="#scents" class="hover:text-pink-400 transition-colors">Fragrâncias</a>
-                <a href="#moods-prontos" class="hover:text-pink-400 transition-colors">Vibes Prontas</a>
+                <a href="#moods-prontos" class="hover:text-pink-400 transition-colors">Moods Sugeridos</a>
                 <a href="#mixer" class="hover:text-pink-400 transition-colors">Crie seu Mood</a>
                 <a href="#why" class="hover:text-pink-400 transition-colors">Por que Nós?</a>
             </nav>
@@ -93,7 +93,7 @@
                 </p>
                 <div class="mt-8">
                     <a href="#mixer" class="glow-button inline-block bg-gradient-to-r from-pink-500 to-violet-600 text-white font-bold text-xl py-4 px-10 rounded-full transition-transform">
-                        CRIE SEU MOOD AGORA
+                        MONTE SUA FRAGRÂNCIA
                     </a>
                 </div>
             </div>
@@ -373,7 +373,7 @@
         <section id="why" class="py-20 bg-gray-900/50">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
-                    <h3 class="text-4xl font-bold">Feito para você, <span class="gradient-text">pensando no mundo.</span></h3>
+                    <h3 class="text-4xl font-bold">Valores <span class="gradient-text">inegociáveis.</span></h3>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 max-w-6xl mx-auto">
                     <div class="text-center">
@@ -392,7 +392,7 @@
                         <p class="text-gray-400">Fórmulas limpas e seguras. Sem conservantes nocivos à sua pele.</p>
                     </div>
                     <div class="text-center">
-                        <div class="mb-3 flex justify-center"><img src="https://raw.githubusercontent.com/Erosskywalker/mood-scents-app/main/images/Bandeira_RS_vetor.png" alt="Bandeira do RS" class="h-14 w-auto object-contain"></div>
+                        <div class="mb-3 flex justify-center items-center h-20"><img src="https://raw.githubusercontent.com/Erosskywalker/mood-scents-app/main/images/Bandeira_RS_vetor.png" alt="Bandeira do RS" class="h-14 w-auto object-contain"></div>
                         <h4 class="text-2xl font-bold mb-2">Fabricação Gaúcha</h4>
                         <p class="text-gray-400">Produzido com orgulho em Porto Alegre no Rio Grande do Sul, Brasil.</p>
                     </div>
@@ -440,41 +440,63 @@
             }
 
             const combinations = {
-                // Combinações de 2 aromas (conforme PDF)
-                'calm-vibes-wood-rush': { title: 'Mood: Mindfulness', description: 'Foco e serenidade. O Calm Vibes acalma a mente enquanto o Wood Rush traz solidez.' },
-                'wood-rush-calm-vibes': { title: 'Mood: Mindfulness', description: 'Foco e serenidade. O Calm Vibes acalma a mente enquanto o Wood Rush traz solidez.' },
-
-                'citrus-pop-lotus-up': { title: 'Mood: Alegria', description: 'Leve e feliz. Uma combinação aquática e cítrica que te faz sorrir instantaneamente.' },
-                'lotus-up-citrus-pop': { title: 'Mood: Alegria', description: 'Leve e feliz. Uma combinação aquática e cítrica que te faz sorrir instantaneamente.' },
-
-                'wood-rush-velvet-aura': { title: 'Mood: Energia', description: 'O contraste do Wood Rush com o Velvet Aura exótico. Poderoso e vibrante, pura energia.' },
-                'velvet-aura-wood-rush': { title: 'Mood: Energia', description: 'O contraste do Wood Rush com o Velvet Aura exótico. Poderoso e vibrante, pura energia.' },
-
-                'calm-vibes-citrus-pop': { title: 'Mood: Auto Estima', description: 'Confiança limpa. Uma vibe de "nasci assim", fresca, natural e muito confiante.' },
-                'citrus-pop-calm-vibes': { title: 'Mood: Auto Estima', description: 'Confiança limpa. Uma vibe de "nasci assim", fresca, natural e muito confiante.' },
+                // === 12 MOODS OFICIAIS ===
                 
-                'juicy-glow-vanilla-haze': { title: 'Mood: Sedução & Auto Estima', description: 'Doce e confiante. A Vanilla Haze seduz e o Juicy Glow traz uma originalidade que eleva a auto estima.' },
-                'vanilla-haze-juicy-glow': { title: 'Mood: Sedução & Auto Estima', description: 'Doce e confiante. A Vanilla Haze seduz e o Juicy Glow traz uma originalidade que eleva a auto estima.' },
+                // 1. Steady Mind (Calm Vibes + Wood Rush) - Mindfulness
+                'calm-vibes-wood-rush': { title: 'Steady Mind', description: 'Mente firme, presença confiante. O Calm Vibes acalma a mente e o Wood Rush traz solidez.' },
+                'wood-rush-calm-vibes': { title: 'Steady Mind', description: 'Mente firme, presença confiante. O Calm Vibes acalma a mente e o Wood Rush traz solidez.' },
 
-                'citrus-pop-wood-rush': { title: 'Mood: Auto Estima', description: 'Presença marcante. O brilho do Citrus Pop com a força do Wood Rush. Impossível ignorar.' },
-                'wood-rush-citrus-pop': { title: 'Mood: Auto Estima', description: 'Presença marcante. O brilho do Citrus Pop com a força do Wood Rush. Impossível ignorar.' },
+                // 2. Good Vibes Only (Lótus Up + Citrus Pop) - Alegria
+                'citrus-pop-lotus-up': { title: 'Good Vibes Only', description: 'Leve e feliz. A combinação aquática do Lótus Up com o frescor do Citrus Pop te faz sorrir instantaneamente.' },
+                'lotus-up-citrus-pop': { title: 'Good Vibes Only', description: 'Leve e feliz. A combinação aquática do Lótus Up com o frescor do Citrus Pop te faz sorrir instantaneamente.' },
 
-                'citrus-pop-juicy-glow': { title: 'Mood: Sedução', description: 'Divertida e atraente. Uma mistura jovem, suculenta e flertante.' },
-                'juicy-glow-citrus-pop': { title: 'Mood: Sedução', description: 'Divertida e atraente. Uma mistura jovem, suculenta e flertante.' },
+                // 3. Confy & Cool (Calm Vibes + Citrus Pop) - Auto Estima
+                'calm-vibes-citrus-pop': { title: 'Confy & Cool', description: 'Uma vibe de "nasci assim". O Calm Vibes limpa e o Citrus Pop traz uma confiança natural e fresca.' },
+                'citrus-pop-calm-vibes': { title: 'Confy & Cool', description: 'Uma vibe de "nasci assim". O Calm Vibes limpa e o Citrus Pop traz uma confiança natural e fresca.' },
 
-                'citrus-pop-vanilla-haze': { title: 'Mood: Energia', description: 'Uma energia doce, gourmand e vibrante que dá água na boca. O azedinho do Citrus Pop com o creme da Vanilla Haze.' },
-                'vanilla-haze-citrus-pop': { title: 'Mood: Energia', description: 'Uma energia doce, gourmand e vibrante que dá água na boca. O azedinho do Citrus Pop com o creme da Vanilla Haze.' },
+                // 4. Cheguei (Vanilla Haze + Juicy Glow) - Sedução & Auto Estima
+                'juicy-glow-vanilla-haze': { title: 'Cheguei', description: 'Doce e confiante. A Vanilla Haze seduz e o Juicy Glow traz uma originalidade que eleva a auto estima.' },
+                'vanilla-haze-juicy-glow': { title: 'Cheguei', description: 'Doce e confiante. A Vanilla Haze seduz e o Juicy Glow traz uma originalidade que eleva a auto estima.' },
 
-                'shine-on-velvet-aura': { title: 'Mood: Sedução', description: 'Luxo e atração. O glamour borbulhante do Shine On com a intensidade floral inebriante do Velvet Aura.' },
-                'velvet-aura-shine-on': { title: 'Mood: Sedução', description: 'Luxo e atração. O glamour borbulhante do Shine On com a intensidade floral inebriante do Velvet Aura.' },
+                // 5. Boss Mode (Citrus Pop + Wood Rush) - Auto Estima
+                'citrus-pop-wood-rush': { title: 'Boss Mode', description: 'Presença marcante. O brilho do Citrus Pop com a força do Wood Rush. Impossível ignorar.' },
+                'wood-rush-citrus-pop': { title: 'Boss Mode', description: 'Presença marcante. O brilho do Citrus Pop com a força do Wood Rush. Impossível ignorar.' },
 
-                // Combinação de 3 aromas (conforme PDF)
-                'citrus-pop-vanilla-haze-velvet-aura': { title: 'Mood: Sedução & Energia', description: 'A combinação completa. O brilho do Citrus Pop, a sedução do Velvet Aura e o calor da Vanilla Haze. Para quem quer tudo.' },
-                'citrus-pop-velvet-aura-vanilla-haze': { title: 'Mood: Sedução & Energia', description: 'A combinação completa. O brilho do Citrus Pop, a sedução do Velvet Aura e o calor da Vanilla Haze. Para quem quer tudo.' },
-                'vanilla-haze-citrus-pop-velvet-aura': { title: 'Mood: Sedução & Energia', description: 'A combinação completa. O brilho do Citrus Pop, a sedução do Velvet Aura e o calor da Vanilla Haze. Para quem quer tudo.' },
-                'vanilla-haze-velvet-aura-citrus-pop': { title: 'Mood: Sedução & Energia', description: 'A combinação completa. O brilho do Citrus Pop, a sedução do Velvet Aura e o calor da Vanilla Haze. Para quem quer tudo.' },
-                'velvet-aura-citrus-pop-vanilla-haze': { title: 'Mood: Sedução & Energia', description: 'A combinação completa. O brilho do Citrus Pop, a sedução do Velvet Aura e o calor da Vanilla Haze. Para quem quer tudo.' },
-                'velvet-aura-vanilla-haze-citrus-pop': { title: 'Mood: Sedução & Energia', description: 'A combinação completa. O brilho do Citrus Pop, a sedução do Velvet Aura e o calor da Vanilla Haze. Para quem quer tudo.' }
+                // 6. VIP Access (Shine On + Velvet Aura + Wood Rush) - Sedução & Auto Estima
+                'shine-on-velvet-aura-wood-rush': { title: 'VIP Access', description: 'Luxo, atração e presença. O glamour do Shine On, a intensidade do Velvet Aura e a força do Wood Rush.' },
+                'shine-on-wood-rush-velvet-aura': { title: 'VIP Access', description: 'Luxo, atração e presença. O glamour do Shine On, a intensidade do Velvet Aura e a força do Wood Rush.' },
+                'velvet-aura-shine-on-wood-rush': { title: 'VIP Access', description: 'Luxo, atração e presença. O glamour do Shine On, a intensidade do Velvet Aura e a força do Wood Rush.' },
+                'velvet-aura-wood-rush-shine-on': { title: 'VIP Access', description: 'Luxo, atração e presença. O glamour do Shine On, a intensidade do Velvet Aura e a força do Wood Rush.' },
+                'wood-rush-shine-on-velvet-aura': { title: 'VIP Access', description: 'Luxo, atração e presença. O glamour do Shine On, a intensidade do Velvet Aura e a força do Wood Rush.' },
+                'wood-rush-velvet-aura-shine-on': { title: 'VIP Access', description: 'Luxo, atração e presença. O glamour do Shine On, a intensidade do Velvet Aura e a força do Wood Rush.' },
+
+                // 7. Imparável (Velvet Aura + Vanilla Haze + Juicy Glow) - Sedução & Auto Estima
+                'juicy-glow-vanilla-haze-velvet-aura': { title: 'Imparável', description: 'A combinação completa. A doçura irresistível do Juicy Glow, a sedução intensa do Velvet Aura e o calor envolvente da Vanilla Haze. Para quem quer tudo.' },
+                'juicy-glow-velvet-aura-vanilla-haze': { title: 'Imparável', description: 'A combinação completa. A doçura irresistível do Juicy Glow, a sedução intensa do Velvet Aura e o calor envolvente da Vanilla Haze. Para quem quer tudo.' },
+                'vanilla-haze-juicy-glow-velvet-aura': { title: 'Imparável', description: 'A combinação completa. A doçura irresistível do Juicy Glow, a sedução intensa do Velvet Aura e o calor envolvente da Vanilla Haze. Para quem quer tudo.' },
+                'vanilla-haze-velvet-aura-juicy-glow': { title: 'Imparável', description: 'A combinação completa. A doçura irresistível do Juicy Glow, a sedução intensa do Velvet Aura e o calor envolvente da Vanilla Haze. Para quem quer tudo.' },
+                'velvet-aura-juicy-glow-vanilla-haze': { title: 'Imparável', description: 'A combinação completa. A doçura irresistível do Juicy Glow, a sedução intensa do Velvet Aura e o calor envolvente da Vanilla Haze. Para quem quer tudo.' },
+                'velvet-aura-vanilla-haze-juicy-glow': { title: 'Imparável', description: 'A combinação completa. A doçura irresistível do Juicy Glow, a sedução intensa do Velvet Aura e o calor envolvente da Vanilla Haze. Para quem quer tudo.' },
+
+                // 8. Glow Party (Shine On + Juicy Glow) - Alegria & Sedução
+                'juicy-glow-shine-on': { title: 'Glow Party', description: 'Brilho e diversão! O glamour festivo do Shine On com a doçura irresistível do Juicy Glow. Para brilhar na pista.' },
+                'shine-on-juicy-glow': { title: 'Glow Party', description: 'Brilho e diversão! O glamour festivo do Shine On com a doçura irresistível do Juicy Glow. Para brilhar na pista.' },
+
+                // 9. Soul Bloom (Pure Bloom + Patch Crew) - Alegria & Mindfulness
+                'patch-crew-pure-bloom': { title: 'Soul Bloom', description: 'Florescer da alma. A alegria floral do Pure Bloom com a consciência plena do Patch Crew. Leveza com profundidade.' },
+                'pure-bloom-patch-crew': { title: 'Soul Bloom', description: 'Florescer da alma. A alegria floral do Pure Bloom com a consciência plena do Patch Crew. Leveza com profundidade.' },
+
+                // 10. Fresh Start (Patch Crew + Citrus Pop) - Energia & Mindfulness
+                'citrus-pop-patch-crew': { title: 'Fresh Start', description: 'Recomeço vibrante. A energia cítrica do Citrus Pop com a consciência do Patch Crew. Para começar o dia com propósito.' },
+                'patch-crew-citrus-pop': { title: 'Fresh Start', description: 'Recomeço vibrante. A energia cítrica do Citrus Pop com a consciência do Patch Crew. Para começar o dia com propósito.' },
+
+                // 11. Nature Power (Lótus Up + Wood Rush) - Energia & Auto Estima
+                'lotus-up-wood-rush': { title: 'Nature Power', description: 'Força da natureza. O frescor aquático do Lótus Up com a solidez amadeirada do Wood Rush. Poder natural.' },
+                'wood-rush-lotus-up': { title: 'Nature Power', description: 'Força da natureza. O frescor aquático do Lótus Up com a solidez amadeirada do Wood Rush. Poder natural.' },
+
+                // 12. Sugar Rush (Vanilla Haze + Pure Bloom) - Alegria & Sedução
+                'pure-bloom-vanilla-haze': { title: 'Sugar Rush', description: 'Onda de doçura! A sedutora Vanilla Haze com a alegria floral do Pure Bloom. Irresistível e vibrante.' },
+                'vanilla-haze-pure-bloom': { title: 'Sugar Rush', description: 'Onda de doçura! A sedutora Vanilla Haze com a alegria floral do Pure Bloom. Irresistível e vibrante.' }
             };
 
             // Efeitos neurocientíficos de cada fragrância (conforme categorias oficiais)
